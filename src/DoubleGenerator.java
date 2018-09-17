@@ -8,7 +8,8 @@ public class DoubleGenerator extends Generator{
 
 	@Override
 	Bracket getBracket() {
-		return null;
+		Bracket bracket = new DoubleBracket();
+		return bracket;
 	}
 
 }
