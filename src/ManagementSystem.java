@@ -1,0 +1,7 @@
+
+public class ManagementSystem {
+		
+	ManagementSystem() {
+	
+	}
+}
