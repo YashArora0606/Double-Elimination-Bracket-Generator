@@ -1,10 +1,45 @@
-
 public abstract class Bracket {
-	abstract int getNumberOfTeams();
-	abstract int getNumberOfRounds();
-	abstract int getNumberOfMatchesInRound(int round);
-	abstract String[][] getTeamsInMatch(int round, int matchNumber); // String[2][]
-	abstract void setMatchWinner(String teamName, int round, int matchNumber);
-	
-	
+ 
+ /**
+  * Constructor 
+  * Get number of teams 
+  */
+ abstract int getNumberOfTeams();
+ 
+ /**
+  * Constructor 
+  * Get number of rounds 
+  */
+ abstract int getNumberOfRounds();
+ 
+ /**
+  * Constructor 
+  * Get number of teams 
+  * 
+  * @param round This is the number of matches in round 
+  */
+ abstract int getNumberOfMatchesInRound(int round);
+ 
+ 
+ /**
+  * Constructor 
+  * Get number of teams in match 
+  * 
+  * @param round This is the round number of the teams in match
+  * @param matchNumber this is the match number of the teams in match
+  */
+ abstract String[][] getTeamsInMatch(int round, int matchNumber); // String[2][]
+ 
+ 
+ /**
+  * Constructor 
+  * Set the winners of the match
+  * 
+  * @param teamName This is the name of the winning team 
+  * @param round This is the winning round number 
+  * @param matchNumber This is the winning match number 
+  */
+ abstract void setMatchWinner(String teamName, int round, int matchNumber);
+ 
+ 
 }
