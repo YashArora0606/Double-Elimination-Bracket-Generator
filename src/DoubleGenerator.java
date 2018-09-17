@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class DoubleGenerator extends Generator{
 	
-	DoubleGenerator(ArrayList Teams) {
+	DoubleGenerator(ArrayList<Team> teams) {
 		
 	}
 
