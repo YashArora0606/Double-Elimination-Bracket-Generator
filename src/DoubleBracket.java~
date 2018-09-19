@@ -31,10 +31,5 @@ public class DoubleBracket extends Bracket{
   // TODO Auto-generated method stub
   
  }
- 
- @Override
- int getMatchBracket(int round, int matchNumber) {
-   return 0; 
- }
 
 }

@@ -4,7 +4,7 @@ public abstract class Bracket {
   * Constructor 
   * Get number of teams 
   */
- abstract int getNumberOfTeams();
+  abstract int getNumberOfTeams();
  
  /**
   * Constructor 
@@ -41,5 +41,5 @@ public abstract class Bracket {
   */
  abstract void setMatchWinner(String teamName, int round, int matchNumber);
  
- 
+ abstract int getMatchBracket(int round, int matchNumber); 
 }
