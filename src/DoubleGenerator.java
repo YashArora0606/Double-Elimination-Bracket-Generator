@@ -8,6 +8,7 @@ public class DoubleGenerator extends Generator{
    //Team [][] winnerBracker = new Team[bracket.getNumberOfTeams()][bracket.getNumberOfTeams()];
  }
 
+
  @Override
  Bracket getBracket() {
   return new DoubleBracket();
