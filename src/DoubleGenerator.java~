@@ -1,14 +1,24 @@
 import java.util.ArrayList;
 
 public class DoubleGenerator extends Generator{
-	
-	DoubleGenerator(ArrayList<Team> teams) {
-		
-	}
+  
+ private Bracket bracket;
+ 
+ DoubleGenerator(ArrayList<Team> teams) {
+   //Team [][] winnerBracker = new Team[bracket.getNumberOfTeams()][bracket.getNumberOfTeams()];
+ }
 
+<<<<<<< HEAD
+ @Override
+ Bracket getBracket() {
+  return new DoubleBracket();
+ }
+=======
 	@Override
 	Bracket getBracket() {
-		return null;
+		Bracket bracket = new DoubleBracket();
+		return bracket;
 	}
+>>>>>>> 9544e97b6835363d259fa1221b158309e82502bc
 
 }

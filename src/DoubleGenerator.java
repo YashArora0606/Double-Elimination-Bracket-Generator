@@ -13,4 +13,5 @@ public class DoubleGenerator extends Generator{
   return new DoubleBracket();
  }
 
+
 }
