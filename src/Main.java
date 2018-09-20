@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Main {
+	
+	
+	public static int round = 0;
+	
 	public static void main(String[] args) {
 		
 		
@@ -28,6 +32,7 @@ public class Main {
 	
 	public static void printRound(ArrayList<Character> teams) {
 		
+		
 		if (teams.size()%2 == 1 && teams.size() != 1) {
 			teams.add(' ');
 		}
@@ -43,8 +48,9 @@ public class Main {
 			
 			
 			Collections.reverse(teams);
-			
 			getRemainingTeams(teams);
+			round++;
+
 			
 			
 			
@@ -59,6 +65,12 @@ public class Main {
 			char winner = fight(teams.get(i*2), teams.get((i*2)+1));
 			teamsLeft.add(winner);
 		}
+		
+		
+		if (round%2 == 0) {
+			Collections.reverse(teamsLeft);
+		}
+		
 		printRound(teamsLeft);
 	}
 	
