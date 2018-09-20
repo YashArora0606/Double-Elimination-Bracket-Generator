@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 	public static void main(String[] args) {
@@ -39,7 +40,16 @@ public class Main {
 				System.out.print(teams.get(i) + "\t");
 			}
 			System.out.println();
+			
+			
+			Collections.reverse(teams);
+			
 			getRemainingTeams(teams);
+			
+			
+			
+			
+			
 		}
 	}
 	
