@@ -6,9 +6,9 @@ public class DoubleGenerator extends Generator{
  
  DoubleGenerator(ArrayList<Team> teams) {
    //Team [][] winnerBracker = new Team[bracket.getNumberOfTeams()][bracket.getNumberOfTeams()];
-	 bracket = this.getBracket();
-	 
-	 logic((DoubleBracket) bracket);
+  bracket = this.getBracket();
+  
+  logic((DoubleBracket) bracket,teams);
  }
 
 
@@ -17,10 +17,10 @@ public class DoubleGenerator extends Generator{
   return new DoubleBracket();
  }
  
- public 	void logic(DoubleBracket bracket) {
-	 
-	 
-	 
+ public  void logic(DoubleBracket bracket,ArrayList<Team> teams) {
+  
+  
+  
  }
  
 
