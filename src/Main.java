@@ -5,6 +5,8 @@ public class Main {
 	
 	
 	public static int round = 0;
+
+	public static ArrayList<Character> losers = new ArrayList<Character>();
 	
 	public static void main(String[] args) {
 		
@@ -12,17 +14,23 @@ public class Main {
 		ArrayList<Character> teams = new ArrayList<Character>();
 
 		teams.add('d');
-		teams.add('b');
-		teams.add('a');
-		teams.add('c');
 		teams.add('e');
-		
+		teams.add('f');
+		teams.add('a');
+		teams.add('b');
+		teams.add('c');
 
 		
-	
+
+		printRound(teams); // print bracket part 1
 		
-		
-		printRound(teams);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		for (int i = 0; i < losers.size(); i++) {
+			System.out.println(losers.get(i));
+		}
 
 
 	
@@ -51,20 +59,18 @@ public class Main {
 			getRemainingTeams(teams);
 			round++;
 
-			
-			
-			
-			
-			
 		}
 	}
 	
 	public static void getRemainingTeams(ArrayList<Character> teams) {
+		
 		ArrayList<Character> teamsLeft= new ArrayList<Character>();
 		for (int i = 0; i < Math.ceil((double) (teams.size()/2)); i++) {
 			char winner = fight(teams.get(i*2), teams.get((i*2)+1));
 			teamsLeft.add(winner);
 		}
+		
+		Collections.reverse(losers);
 		
 		
 		if (round%2 == 0) {
@@ -84,13 +90,16 @@ public class Main {
 		
 		
 		if (team1 < team2) {
+			losers.add(team2);
 			return team1;
 		} else {
+			losers.add(team1);
 			return team2;
 		}
 		
 	
 	}
+
 
 	
 }
