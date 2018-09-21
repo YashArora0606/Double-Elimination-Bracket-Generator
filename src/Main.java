@@ -10,27 +10,32 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		
-		ArrayList<Character> teams = new ArrayList<Character>();
-
-		teams.add('d');
-		teams.add('e');
-		teams.add('f');
-		teams.add('a');
-		teams.add('b');
-		teams.add('c');
+		 System.out.println((int)(Math.ceil(Math.log(5)/Math.log(2))));
 
 		
-
-		printRound(teams); // print bracket part 1
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-
-		for (int i = 0; i < losers.size(); i++) {
-			System.out.println(losers.get(i));
-		}
+//		ArrayList<Character> teams = new ArrayList<Character>();
+//
+//
+//		teams.add('a');
+//		teams.add('b');
+//		teams.add('c');
+//		teams.add('d');
+//		teams.add('e');
+//		teams.add('f');
+//		teams.add('g');
+//
+//		
+//
+//		printRound(teams); // print bracket part 1
+//		
+//		System.out.println();
+//		System.out.println();
+//		System.out.println();
+//
+//		for (int i = 0; i < losers.size(); i++) {
+//			System.out.println(losers.get(i));
+//		}
 
 
 	
@@ -49,9 +54,16 @@ public class Main {
 			System.out.println(teams.get(0));
 			
 		} else {
+		
 			for (int i = 0; i < teams.size(); i++) {
 				System.out.print(teams.get(i) + "\t");
 			}
+			
+			
+
+			
+			
+			
 			System.out.println();
 			
 			
@@ -60,6 +72,10 @@ public class Main {
 			round++;
 
 		}
+		
+		
+		
+		
 	}
 	
 	public static void getRemainingTeams(ArrayList<Character> teams) {
@@ -70,7 +86,7 @@ public class Main {
 			teamsLeft.add(winner);
 		}
 		
-		Collections.reverse(losers);
+		//Collections.reverse(losers);
 		
 		
 		if (round%2 == 0) {
