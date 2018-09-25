@@ -14,9 +14,10 @@ public class DoubleGenerator extends Generator{
  Bracket getBracket() {
 	 return bracket;
  
- 
  }
  
 
 
 }
+
+
