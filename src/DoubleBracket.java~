@@ -1,35 +1,49 @@
+import java.util.ArrayList;
+
 public class DoubleBracket extends Bracket{
+	
+	ArrayList<Team> teams;
+	
   
-  
+  DoubleBracket(ArrayList<Team> teams) {
+	  this.teams = teams;
+
+	  
+  }
 
  @Override
  int getNumberOfTeams() {
-  // TODO Auto-generated method stub
-  return 6;
+	 return teams.size();
+
  }
 
  @Override
  int getNumberOfRounds() {
-  // TODO Auto-generated method stub
-  return 6;
+	 return (int)(Math.ceil(Math.log(teams.size())/Math.log(2)));
  }
 
  @Override
  int getNumberOfMatchesInRound(int round) {
-  // TODO Auto-generated method stub
-  return 0;
+  return 0;  
  }
 
  @Override
  String[][] getTeamsInMatch(int round, int matchNumber) {
-  // TODO Auto-generated method stub
   return null;
  }
 
  @Override
- void setMatchWinner(String teamName, int round, int matchNumber) {
-  // TODO Auto-generated method stub
-  
+ void setMatchWinner(String teamName, int round, int matchNumber) {  
  }
+ 
+ @Override
+ int getMatchBracket(int round, int matchNumber) {
+   return 0; 
+ }
+ 
+ 
+ 
+ 
+ 
 
 }

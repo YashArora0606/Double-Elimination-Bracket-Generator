@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class DoubleBracket extends Bracket{
+
 	ArrayList<Team> teams;
   
 	// DONE
@@ -17,6 +18,7 @@ public class DoubleBracket extends Bracket{
 	int getNumberOfRounds() {
 		return (int)(Math.ceil(Math.log(teams.size())/Math.log(2)));
 	}
+
 
  
  
