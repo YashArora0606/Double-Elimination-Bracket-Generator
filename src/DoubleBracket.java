@@ -1,25 +1,25 @@
 import java.util.ArrayList;
 
 public class DoubleBracket extends Bracket{
-	
-	ArrayList<Team> teams;
-	
+ 
+ ArrayList<Team> teams;
+ 
   
   DoubleBracket(ArrayList<Team> teams) {
-	  this.teams = teams;
+   this.teams = teams;
 
-	  
+   
   }
 
  @Override
  int getNumberOfTeams() {
-	 return teams.size();
+  return teams.size();
 
  }
 
  @Override
  int getNumberOfRounds() {
-	 return (int)(Math.ceil(Math.log(teams.size())/Math.log(2)));
+  return (int)(Math.ceil(Math.log(teams.size())/Math.log(2)));
  }
 
  @Override
