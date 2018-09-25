@@ -138,7 +138,7 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
-  for (int i = 1; i < 256; i++) {
+  for (int i = 1; i < 15; i++) {
    teams.add(new Team(Integer.toString(i)));
   }
   
