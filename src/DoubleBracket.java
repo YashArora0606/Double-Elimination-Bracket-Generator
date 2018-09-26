@@ -7,6 +7,8 @@ public class DoubleBracket extends Bracket{
  int numTeams;
  int numMatches;
  int[] numMatchesInRound;
+ Team[][] winnersBracket;
+ Team[][] losersBracket;
   
  // DONE
  DoubleBracket(ArrayList<Team> teams) {
