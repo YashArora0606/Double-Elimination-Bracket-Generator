@@ -53,10 +53,6 @@ public class DoubleBracket extends Bracket{
  
 
 
- static double log(int x, int base) {
-     return (double) (Math.log(x) / Math.log(base));
- }
- 
  @Override
  int getNumberOfMatchesInRound(int round) {
   return 5;  
@@ -69,12 +65,22 @@ public class DoubleBracket extends Bracket{
 
  @Override
  void setMatchWinner(String teamName, int round, int matchNumber) {  
+	 
  }
  
  @Override
  int getMatchBracket(int round, int matchNumber) {
+	
+	// if losers bracket then 1
+	 // if winners bracket then 0
+	 
    return 0; 
  }
+
+ static double log(int x, int base) {
+     return (double) (Math.log(x) / Math.log(base));
+ }
+ 
  
  
  
