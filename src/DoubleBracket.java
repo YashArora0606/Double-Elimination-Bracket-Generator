@@ -7,8 +7,8 @@ public class DoubleBracket extends Bracket{
  int numTeams;
  int numMatches;
  int[] numMatchesInRound;
- Team[][] winnersBracket;
- Team[][] losersBracket;
+ Team[][] bracket;
+ 
   
  // DONE
  DoubleBracket(ArrayList<Team> teams) {
@@ -30,8 +30,7 @@ public class DoubleBracket extends Bracket{
   
   
   //Create 2D array 
-  winnersBracket = new Team[initalRounds][teams.size()];
-  losersBracket = new Team[numRounds][teams.size()/2];
+  bracket = new Team[numRounds][teams.size()/2+teams.size()];
   
   
   
@@ -65,15 +64,15 @@ public class DoubleBracket extends Bracket{
 
  @Override
  void setMatchWinner(String teamName, int round, int matchNumber) {  
-	 
+  
  }
  
  @Override
  int getMatchBracket(int round, int matchNumber) {
-	
-	// if losers bracket then 1
-	 // if winners bracket then 0
-	 
+ 
+ // if losers bracket then 1
+  // if winners bracket then 0
+  
    return 0; 
  }
 
