@@ -7,8 +7,11 @@ public class DoubleBracket extends Bracket{
  int numTeams;
  int numMatches;
  int[] numMatchesInRound;
- Team[][] bracket;
  
+ ArrayList<Team>[] round;
+ 
+ 
+
   
  // DONE
  DoubleBracket(ArrayList<Team> teams) {
@@ -16,10 +19,7 @@ public class DoubleBracket extends Bracket{
   
  
   numTeams = teams.size();
-
-  
   numMatchesInRound = new int[numRounds + 1];  
-  
   numMatches = (teams.size() - 1) * 2;
   
   //Calculate number of rounds 
@@ -29,8 +29,20 @@ public class DoubleBracket extends Bracket{
   numRounds = initalRounds + surplusRounds; 
   
   
+  
+  // Every round is an ArrayList of the teams that play in the round
+  for (int i = 0; i < numRounds; i++) {
+	  round[i] = new ArrayList<Team>();
+  }
+  
+  // Add teams to the very first round 
+  for (int i = 0; i < teams.size(); i++) {
+	  round[0].add(teams.get(i));
+  }
+  
+  
+  
   //Create 2D array 
-  bracket = new Team[numRounds][teams.size()/2+teams.size()];
   
   
   
