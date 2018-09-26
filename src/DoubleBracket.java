@@ -7,8 +7,6 @@ public class DoubleBracket extends Bracket{
  int numTeams;
  int numMatches;
  int[] numMatchesInRound;
- Team [][] winnersBracket;
- Team [][] losersBracket;
   
  // DONE
  DoubleBracket(ArrayList<Team> teams) {
@@ -16,30 +14,6 @@ public class DoubleBracket extends Bracket{
   
  
   numTeams = teams.size();
-<<<<<<< HEAD
-  
-  numMatchesInRound = new int[numRounds + 1];  
-  
-  numMatches = (teams.size() - 1) * 2;
-  
-  //Calculate number of rounds 
-  double L2 = log(teams.size(),2);  
-  int initalRounds = (int)Math.ceil(L2); 
-  int surplusRounds = (int)(Math.ceil(log((int)L2,2)));
-  numRounds = initalRounds + surplusRounds; 
-  
-  
-  //Create 2D array 
-  winnersBracket = new Team[initalRounds][teams.size()];
-  losersBracket = new Team[numRounds][teams.size()/2];
-  
-  
-  
-  
-  
-  
-  
-=======
   numMatches = (teams.size() - 1) * 2;
   numRounds = (int)   (Math.ceil(log(teams.size(),2)) + (int)(Math.ceil(log((int)log(teams.size(),2),2))));
 
@@ -50,7 +24,6 @@ public class DoubleBracket extends Bracket{
 //  int surplusRounds = (int)(Math.ceil(log((int)log(teams.size(),2),2)));
   
   
->>>>>>> 3222543caace12bdffa06c2876db8d019d0d7fd0
  }
  // DONE
  @Override
