@@ -43,14 +43,7 @@ public class DoubleBracket extends Bracket{
   
   
   //Create 2D array 
-  
-  for(int i = 0; i<numRounds; i++){
-    for(int j = 0; j<teams.size(); j++){
-      bracket[i][j] = teams.get(j);
-    }
-  }
-  
-  
+
   
   
   
