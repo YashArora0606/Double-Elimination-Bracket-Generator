@@ -16,6 +16,7 @@ public class DoubleBracket extends Bracket{
   
  
   numTeams = teams.size();
+<<<<<<< HEAD
   
   numMatchesInRound = new int[numRounds + 1];  
   
@@ -38,6 +39,18 @@ public class DoubleBracket extends Bracket{
   
   
   
+=======
+  numMatches = (teams.size() - 1) * 2;
+  numRounds = (int)   (Math.ceil(log(teams.size(),2)) + (int)(Math.ceil(log((int)log(teams.size(),2),2))));
+
+  
+  
+//  double L2 = log(teams.size(),2);
+//  int initalRounds = (int)Math.ceil(log(teams.size(),2));
+//  int surplusRounds = (int)(Math.ceil(log((int)log(teams.size(),2),2)));
+  
+  
+>>>>>>> 3222543caace12bdffa06c2876db8d019d0d7fd0
  }
  // DONE
  @Override
@@ -48,6 +61,12 @@ public class DoubleBracket extends Bracket{
  @Override
  int getNumberOfRounds() {
   return numRounds;
+ }
+ 
+
+
+ static double log(int x, int base) {
+     return (double) (Math.log(x) / Math.log(base));
  }
  
  @Override
@@ -69,9 +88,6 @@ public class DoubleBracket extends Bracket{
    return 0; 
  }
  
-  static double log(int x, int base) {
-     return (double) (Math.log(x) / Math.log(base));
- }
  
  
  
