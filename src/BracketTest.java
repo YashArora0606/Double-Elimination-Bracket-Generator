@@ -148,7 +148,7 @@ class BracketTest {
 
   //System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
   
-  bracket.setMatchWinner("5", 1, 1);
+  //bracket.setMatchWinner("5", 1, 1);
   
   //System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
   
@@ -157,15 +157,17 @@ class BracketTest {
   //System.out.println(bracket.getNumberOfMatchesInRound(3));
   //System.out.println(bracket.getNumberOfMatchesInRound(4));
   
-  double L2 = log(4,2);
+//  double L2 = log(4,2);
+//  
+//  int initalRounds = (int)Math.ceil(L2);
+//  
+//  int surplusRounds = (int)(Math.ceil(log((int)L2,2)));
+//  int totalRounds = initalRounds + surplusRounds; 
+//  
   
-  int initalRounds = (int)Math.ceil(L2);
-  
-  int surplusRounds = (int)(Math.ceil(log((int)L2,2)));
-  int totalRounds = initalRounds + surplusRounds; 
-  
-  
-  System.out.println(bracket.getNumberOfRounds());
+  //System.out.println(bracket.getNumberOfRounds());
+  System.out.println(bracket.getNumberOfMatchesInRound(0));
+
   
  
 

@@ -8,7 +8,8 @@ public class DoubleBracket extends Bracket{
  int numMatches;
  int[] numMatchesInRound;
  
- ArrayList<Team>[] round;
+ //ArrayList<Team>[] round;
+ ArrayList<ArrayList<Team>> round;
  
  
 
@@ -28,17 +29,22 @@ public class DoubleBracket extends Bracket{
   int surplusRounds = (int)(Math.ceil(log((int)L2,2)));
   numRounds = initalRounds + surplusRounds; 
   
+  round = new ArrayList<ArrayList<Team>>(numRounds);
   
   
-  // Every round is an ArrayList of the teams that play in the round
+  
+   //Every round is an ArrayList of the teams that play in the round
   for (int i = 0; i < numRounds; i++) {
-	  round[i] = new ArrayList<Team>();
+	ArrayList<Team> indArr = new ArrayList<Team>();
+	round.add(indArr);
   }
   
   // Add teams to the very first round 
   for (int i = 0; i < teams.size(); i++) {
-	  round[0].add(teams.get(i));
+	  round.get(0).add(teams.get(i));
   }
+  
+  //System.out.println(round.toString());
   
   
   
@@ -63,8 +69,9 @@ public class DoubleBracket extends Bracket{
 
 
  @Override
- int getNumberOfMatchesInRound(int round) {
-  return 5;  
+ int getNumberOfMatchesInRound(int roundNum) {
+	int numMatches = (int) Math.floor((round.get(roundNum).size())/2); 
+  return numMatches;  
  }
 
  @Override
