@@ -138,7 +138,7 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 64; i++) {
    teams.add(new Team(Integer.toString(i)));
   }
   
@@ -146,6 +146,11 @@ class BracketTest {
 
   DoubleBracket bracket = (DoubleBracket)generator.getBracket();
 
+  
+  
+  for (int i = 1; i <= 32; i++) {
+	  bracket.setMatchWinner(Integer.toString((i-1)*2), 1, i);
+  }
   //System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
   
   //bracket.setMatchWinner("5", 1, 1);
@@ -166,7 +171,16 @@ class BracketTest {
 //  
   
   //System.out.println(bracket.getNumberOfRounds());
-  System.out.println(bracket.getNumberOfMatchesInRound(0));
+
+  
+
+
+
+  
+  
+  
+  System.out.println();
+  System.out.println(bracket.getNumberOfMatchesInRound(2));
 
  
 
