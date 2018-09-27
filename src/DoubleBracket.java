@@ -42,8 +42,12 @@ public class DoubleBracket extends Bracket{
   
   
   
+<<<<<<< HEAD
   
   
+=======
+  //Create 2D array 
+>>>>>>> af4b58b69c7a295b55111bc0699b4d88d9c25d15
   
   
   
