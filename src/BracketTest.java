@@ -138,7 +138,7 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
-  for (int i = 1; i <= 512; i++) {
+  for (int i = 0; i < 4; i++) {
    teams.add(new Team(Integer.toString(i)));
   }
   
@@ -168,7 +168,6 @@ class BracketTest {
   //System.out.println(bracket.getNumberOfRounds());
   System.out.println(bracket.getNumberOfMatchesInRound(0));
 
-  
  
 
   

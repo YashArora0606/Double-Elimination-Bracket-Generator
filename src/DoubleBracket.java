@@ -37,6 +37,7 @@ public class DoubleBracket extends Bracket{
   for (int i = 0; i < numRounds; i++) {
 	ArrayList<Team> indArr = new ArrayList<Team>();
 	round.add(indArr);
+
   }
   
   // Add teams to the very first round 
@@ -52,9 +53,10 @@ public class DoubleBracket extends Bracket{
   
   
   
-  
-  
+
  }
+ 
+ 
  // DONE
  @Override
  int getNumberOfTeams() {
@@ -72,20 +74,21 @@ public class DoubleBracket extends Bracket{
  int getNumberOfMatchesInRound(int roundNum) {
 	int numMatches = (int) Math.floor((round.get(roundNum).size())/2); 
   return numMatches;  
+
  }
 
  @Override
- String[][] getTeamsInMatch(int round, int matchNumber) {
+ String[][] getTeamsInMatch(int roundNum, int matchNumber) {
   return null;
  }
 
  @Override
- void setMatchWinner(String teamName, int round, int matchNumber) {  
+ void setMatchWinner(String teamName, int roundNum, int matchNumber) {  
   
  }
  
  @Override
- int getMatchBracket(int round, int matchNumber) {
+ int getMatchBracket(int roundNum, int matchNumber) {
  
  // if losers bracket then 1
   // if winners bracket then 0
