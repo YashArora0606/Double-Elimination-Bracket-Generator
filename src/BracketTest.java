@@ -138,19 +138,34 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
-  for (int i = 0; i < 64; i++) {
-   teams.add(new Team(Integer.toString(i)));
-  }
+//  for (int i = 0; i < 20; i++) {
+//   teams.add(new Team(((char)(i+64))+""));
+//  }
+  
+  teams.add(new Team("A"));
+  teams.add(new Team("B"));
+  
+  teams.add(new Team("C"));
+  teams.add(new Team("D"));
+  
+  teams.add(new Team("E"));
+  teams.add(new Team("F"));
+  
+  teams.add(new Team("G"));
+  teams.add(new Team("H"));
+  
+  teams.add(new Team("I"));
+
+
+
+
   
   generator = new DoubleGenerator(teams);
 
   DoubleBracket bracket = (DoubleBracket)generator.getBracket();
 
   
-  
-  for (int i = 1; i <= 32; i++) {
-	  bracket.setMatchWinner(Integer.toString((i-1)*2), 1, i);
-  }
+
   //System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
   
   //bracket.setMatchWinner("5", 1, 1);
@@ -172,15 +187,56 @@ class BracketTest {
   
   //System.out.println(bracket.getNumberOfRounds());
 
+//  for (int j = 1; j < bracket.getNumberOfRounds(); j++) {
+//	  for (int i = 1; i <= bracket.getNumberOfMatchesInRound(j); i++) {
+//		  bracket.setMatchWinner(Integer.toString((i-1)*2), j, i);
+//	  }
+//  }
   
+//  for (int i = 1; i <= bracket.getNumberOfMatchesInRound(2); i++) {
+//	  bracket.setMatchWinner(Integer.toString((i-1)*2), 2, i);
+//  }
+
+//  for (int i = 1; i <)
 
 
+  
+//  bracket.setMatchWinner("A", 1, 1);
+//  bracket.setMatchWinner("B", 1, 2);
+//  bracket.setMatchWinner("C", 1, 3);
+//  bracket.setMatchWinner("D", 1, 4);
+
 
   
+//  System.out.println();
+//  
+//  for (int i = 1; i < bracket.getNumberOfRounds(); i++) {
+//	  
+//	  int num = bracket.getNumberOfMatchesInRound(i);
+//	  
+//	  if (num != 0) {
+//		  System.out.println(num);
+//	  }
+//  }
+
+  System.out.println();
   
+  String[][] thing = bracket.getTeamsInMatch(3, 1);
+  
+  System.out.println("Top:");
+  for (int i = 0; i < thing[0].length; i++) {
+	  System.out.println(thing[0][i]);
+  }
   
   System.out.println();
-  System.out.println(bracket.getNumberOfMatchesInRound(2));
+
+  System.out.println("Bottom:");
+  for (int i = 0; i < thing[1].length; i++) {
+	  System.out.println(thing[1][i]);
+  }
+
+  
+  //System.out.print(bracket.getNumberOfRounds());
 
  
 
