@@ -1,127 +1,3 @@
-//import java.util.ArrayList;
-//import java.util.Collections;
-//
-//public class Main {
-// 
-// 
-// public static int round = 0;
-//
-// public static ArrayList<Character> losers = new ArrayList<Character>();
-// 
-// public static void main(String[] args) {
-//  
-//   System.out.println((int)(Math.ceil(Math.log(5)/Math.log(2))));
-//
-//  
-//  
-////  ArrayList<Character> teams = new ArrayList<Character>();
-////
-////
-////  teams.add('a');
-////  teams.add('b');
-////  teams.add('c');
-////  teams.add('d');
-////  teams.add('e');
-////  teams.add('f');
-////  teams.add('g');
-////
-////  
-////
-////  printRound(teams); // print bracket part 1
-////  
-////  System.out.println();
-////  System.out.println();
-////  System.out.println();
-////
-////  for (int i = 0; i < losers.size(); i++) {
-////   System.out.println(losers.get(i));
-////  }
-//
-//
-// 
-//  
-//  
-// }
-// 
-// public static void printRound(ArrayList<Character> teams) {
-//  
-//  
-//  if (teams.size()%2 == 1 && teams.size() != 1) {
-//   teams.add(' ');
-//  }
-//  
-//  if (teams.size() == 1) {
-//   System.out.println(teams.get(0));
-//   
-//  } else {
-//  
-//   for (int i = 0; i < teams.size(); i++) {
-//    System.out.print(teams.get(i) + "\t");
-//   }
-//   
-//   
-//
-//   
-//   
-//   
-//   System.out.println();
-//   
-//   
-//   Collections.reverse(teams);
-//   getRemainingTeams(teams);
-//   round++;
-//
-//  }
-//  
-//  
-//  
-//  
-// }
-// 
-// public static void getRemainingTeams(ArrayList<Character> teams) {
-//  
-//  ArrayList<Character> teamsLeft= new ArrayList<Character>();
-//  for (int i = 0; i < Math.ceil((double) (teams.size()/2)); i++) {
-//   char winner = fight(teams.get(i*2), teams.get((i*2)+1));
-//   teamsLeft.add(winner);
-//  }
-//  
-//  //Collections.reverse(losers);
-//  
-//  
-//  if (round%2 == 0) {
-//   Collections.reverse(teamsLeft);
-//  }
-//  
-//  printRound(teamsLeft);
-// }
-// 
-// public static char fight(char team1, char team2) {
-//  
-//  if (team1 == ' ') {
-//   return team2;
-//  } else  if (team2 == ' ') {
-//   return team1;
-//  }
-//  
-//  
-//  if (team1 < team2) {
-//   losers.add(team2);
-//   return team1;
-//  } else {
-//   losers.add(team1);
-//   return team2;
-//  }
-//  
-// 
-// }
-//
-//
-// 
-//}
-//
-//
-//
 
 
 import java.util.ArrayList;
@@ -138,6 +14,7 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
+<<<<<<< HEAD
 //  for (int i = 0; i < 20; i++) {
 //   teams.add(new Team(((char)(i+64))+""));
 //  }
@@ -159,32 +36,39 @@ class BracketTest {
 
 
 
+=======
+  for (int i = 0; i < 8; i++) {
+   teams.add(new Team(Integer.toString(i)));
+  }
+>>>>>>> b6dd7ff1cf0b8717f040d8acc2edfa77ef321ddb
   
   generator = new DoubleGenerator(teams);
 
   DoubleBracket bracket = (DoubleBracket)generator.getBracket();
 
   
+<<<<<<< HEAD
 
   //System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
+=======
   
-  //bracket.setMatchWinner("5", 1, 1);
+   //void setMatchWinner(String teamName, int roundNum, int matchNumber) {  
+  for(int i = 0; i<4; i++){
+    bracket.setMatchWinner(Integer.toString(i*2), 1, i+1);
+  }
+>>>>>>> b6dd7ff1cf0b8717f040d8acc2edfa77ef321ddb
   
-  //System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
+ 
+  bracket.setMatchWinner(Integer.toString(1), 1, 5);
+  bracket.setMatchWinner(Integer.toString(5), 1, 6);
   
-  //System.out.println(bracket.getNumberOfMatchesInRound(1));
-  //System.out.println(bracket.getNumberOfMatchesInRound(2));
-  //System.out.println(bracket.getNumberOfMatchesInRound(3));
-  //System.out.println(bracket.getNumberOfMatchesInRound(4));
+  bracket.setMatchWinner(Integer.toString(0), 2, 1);
+  bracket.setMatchWinner(Integer.toString(4), 2, 2);  
   
-//  double L2 = log(4,2);
-//  
-//  int initalRounds = (int)Math.ceil(L2);
-//  
-//  int surplusRounds = (int)(Math.ceil(log((int)L2,2)));
-//  int totalRounds = initalRounds + surplusRounds; 
-//  
+  bracket.setMatchWinner(Integer.toString(1), 2, 3);
+  bracket.setMatchWinner(Integer.toString(6), 2, 4);
   
+<<<<<<< HEAD
   //System.out.println(bracket.getNumberOfRounds());
 
 //  for (int j = 1; j < bracket.getNumberOfRounds(); j++) {
@@ -199,6 +83,13 @@ class BracketTest {
 
 //  for (int i = 1; i <)
 
+=======
+  bracket.setMatchWinner(Integer.toString(0), 3, 1);
+  
+  bracket.setMatchWinner(Integer.toString(1), 3, 2);
+  bracket.setMatchWinner(Integer.toString(6), 3, 3);
+  bracket.setMatchWinner(Integer.toString(1), 4, 1);
+>>>>>>> b6dd7ff1cf0b8717f040d8acc2edfa77ef321ddb
 
   
 //  bracket.setMatchWinner("A", 1, 1);
@@ -223,6 +114,7 @@ class BracketTest {
   
   String[][] thing = bracket.getTeamsInMatch(3, 1);
   
+<<<<<<< HEAD
   System.out.println("Top:");
   for (int i = 0; i < thing[0].length; i++) {
 	  System.out.println(thing[0][i]);
@@ -238,11 +130,20 @@ class BracketTest {
   
   //System.out.print(bracket.getNumberOfRounds());
 
+=======
+>>>>>>> b6dd7ff1cf0b8717f040d8acc2edfa77ef321ddb
  
 
-  
-  
+   
 
+  
+  System.out.println();
+  System.out.println(bracket.getNumberOfRounds());
+  System.out.println(bracket.getNumberOfMatchesInRound(1));
+  System.out.println(bracket.getMatchBracket(1,2));
+  
+  System.out.println(bracket.getNumberOfMatchesInRound(2));
+  
   
 
  }
