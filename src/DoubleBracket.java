@@ -114,7 +114,78 @@ public class DoubleBracket extends Bracket{
 
  @Override
  String[][] getTeamsInMatch(int roundNum, int matchNumber) {
-  return null;
+	 
+	 String[][] teamsInMatch = new String[2][];
+
+	 ArrayList<String> possibleTop = new ArrayList<String>();
+	 ArrayList<String> possibleBottom = new ArrayList<String>();
+
+	 
+	 if (roundNum > 1) {
+		 possibleTop.addAll(findPossTop(roundNum-1, matchNumber*2));
+		 possibleBottom.addAll(findPossTop(roundNum-1, (matchNumber*2)-1));
+		 
+		 teamsInMatch[1] = new String[possibleTop.size()];
+		 teamsInMatch[0] = new String[possibleBottom.size()];
+
+		 for (int i = 0; i < teamsInMatch[1].length; i++) {
+			 teamsInMatch[1][i] = possibleTop.get(i);
+		 }
+		 for (int i = 0; i < teamsInMatch[0].length; i++) {
+			 teamsInMatch[0][i] = possibleBottom.get(i);
+		 }
+		 
+		 
+		 
+	 } else {		 
+		 String top = round.get(0).get((matchNumber*2)-2);
+		 String bottom =round.get(0).get((matchNumber*2)-1);
+		 teamsInMatch[0] = new String[] {top};
+		 teamsInMatch[1] = new String[] {bottom};
+	 }
+
+	 
+	 
+//	 teamsInMatch[0] = (String[]) possibleBottom.toArray();
+//	 teamsInMatch[1] = (String[]) possibleTop.toArray();
+
+	 
+	 //System.out.println(findPossTop(roundNum-1, matchNumber*2).toString());
+	 //System.out.println(findPossTop(roundNum-1, (matchNumber*2)-1).toString());
+
+
+  return teamsInMatch;
+ }
+ 
+ ArrayList<String> findPossTop(int roundNum, int matchNumber) {
+	 ArrayList<String> possibleTop = new ArrayList<String>();		
+	 		
+	 	// If it gets to round 0, no teams are playing, so an empty array is returned
+	 	if (roundNum == 0) {
+	 		return possibleTop;
+	 	}
+	 	
+	 	// 
+		 if ((matchNumber*2)-2 < round.get(roundNum-1).size()) {
+			 
+			 possibleTop.add(round.get(roundNum-1).get((matchNumber*2)-1));
+			 if ((matchNumber*2)-2 < round.get(roundNum-1).size()) {
+				 possibleTop.add(round.get(roundNum-1).get((matchNumber*2)-2));
+			 }
+			 
+			 return possibleTop;
+			 
+		 } else {
+
+			 ArrayList<String> combinedArray = new ArrayList<String>();
+			 combinedArray.addAll(findPossTop(roundNum-1, matchNumber*2));
+			 combinedArray.addAll(findPossTop(roundNum-1, (matchNumber*2)-1));
+	
+			 return combinedArray;
+		 }
+		 
+
+
  }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  @Override

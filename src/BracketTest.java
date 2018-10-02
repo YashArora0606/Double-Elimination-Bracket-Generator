@@ -14,6 +14,7 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
+<<<<<<< HEAD
   for (int i = 0; i < 9; i++) {
    teams.add(new Team(Integer.toString(i)));
   }
@@ -35,15 +36,24 @@ class BracketTest {
   /*
   bracket.setMatchWinner(Integer.toString(1), 1, 5);
   bracket.setMatchWinner(Integer.toString(5), 1, 6);
+=======
   
-  bracket.setMatchWinner(Integer.toString(0), 2, 1);
-  bracket.setMatchWinner(Integer.toString(4), 2, 2);  
+  teams.add(new Team("A"));
+  teams.add(new Team("B"));
   
-  bracket.setMatchWinner(Integer.toString(1), 2, 3);
-  bracket.setMatchWinner(Integer.toString(6), 2, 4);
+  teams.add(new Team("C"));
+  teams.add(new Team("D"));
+>>>>>>> 35651f044639e87ebb548439f9aec378e63b13a6
   
-  bracket.setMatchWinner(Integer.toString(0), 3, 1);
+  teams.add(new Team("E"));
+  teams.add(new Team("F"));
   
+  teams.add(new Team("G"));
+  teams.add(new Team("H"));
+  
+  teams.add(new Team("I"));
+  
+<<<<<<< HEAD
   bracket.setMatchWinner(Integer.toString(1), 3, 2);
   bracket.setMatchWinner(Integer.toString(6), 3, 3);
   bracket.setMatchWinner(Integer.toString(1), 4, 1);
@@ -72,17 +82,32 @@ class BracketTest {
   System.out.println("");
   
  
+=======
+  generator = new DoubleGenerator(teams);
 
-   
+  DoubleBracket bracket = (DoubleBracket)generator.getBracket();
 
+
+  String[][] thing = bracket.getTeamsInMatch(3, 1);
+>>>>>>> 35651f044639e87ebb548439f9aec378e63b13a6
+
+  System.out.println();
+  
+
+  System.out.println("Top:");
+  for (int i = 0; i < thing[0].length; i++) {
+	  System.out.println(thing[0][i]);
+  }
   
   System.out.println();
-  System.out.println(bracket.getNumberOfRounds());
-  System.out.println(bracket.getNumberOfMatchesInRound(1));
-  System.out.println(bracket.getMatchBracket(1,2));
+
+  System.out.println("Bottom:");
+  for (int i = 0; i < thing[1].length; i++) {
+	  System.out.println(thing[1][i]);
+  }
+
   
-  System.out.println(bracket.getNumberOfMatchesInRound(2));
-  
+\  
   
 
  }
