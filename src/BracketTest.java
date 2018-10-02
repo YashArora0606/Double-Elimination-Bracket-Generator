@@ -14,7 +14,7 @@ class BracketTest {
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
 
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 9; i++) {
    teams.add(new Team(Integer.toString(i)));
   }
   
@@ -25,11 +25,14 @@ class BracketTest {
   
   
    //void setMatchWinner(String teamName, int roundNum, int matchNumber) {  
+  /*
   for(int i = 0; i<4; i++){
     bracket.setMatchWinner(Integer.toString(i*2), 1, i+1);
   }
+  */
   
  
+  /*
   bracket.setMatchWinner(Integer.toString(1), 1, 5);
   bracket.setMatchWinner(Integer.toString(5), 1, 6);
   
@@ -44,9 +47,29 @@ class BracketTest {
   bracket.setMatchWinner(Integer.toString(1), 3, 2);
   bracket.setMatchWinner(Integer.toString(6), 3, 3);
   bracket.setMatchWinner(Integer.toString(1), 4, 1);
-
+  bracket.setMatchWinner(Integer.toString(1), 6, 1);
+  bracket.setMatchWinner(Integer.toString(0), 7, 1);
+  */
 
   
+  System.out.println("winnerRound " + bracket.round.get(0));   
+  System.out.println("loserRound " + bracket.loserRound.get(0));
+  System.out.println("winnerRound2 " + bracket.round.get(1));   
+  System.out.println("loserRound2 " + bracket.loserRound.get(1));
+  System.out.println("winnerRound3 " + bracket.round.get(2));   
+  System.out.println("loserRound3 " + bracket.loserRound.get(2));
+  System.out.println("winnerRound4 " + bracket.round.get(3));   
+  System.out.println("loserRound4 " + bracket.loserRound.get(3));
+  System.out.println("winnerRound5 " + bracket.round.get(4));   
+  System.out.println("loserRound5 " + bracket.loserRound.get(4));
+  System.out.println("final Round " + bracket.finalRound[0] + " , " + bracket.finalRound[1] );
+  
+  System.out.println("winnerRound6 " + bracket.round.get(5));   
+  System.out.println("loserRound6 " + bracket.loserRound.get(5));
+  System.out.println("final Round2 " + bracket.finalRound[0] + " , " + bracket.finalRound[1] );
+  System.out.println("winnerRound7 " + bracket.round.get(6));   
+  System.out.println("loserRound7 " + bracket.loserRound.get(6));
+  System.out.println("");
   
  
 
