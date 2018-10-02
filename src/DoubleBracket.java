@@ -329,13 +329,12 @@ public class DoubleBracket extends Bracket{
  // if losers bracket then 1
   // if winners bracket then 0
   
-   return 3; 
+   return -1; 
  }
 
  static double log(int x, int base) {
      return (double) (Math.log(x) / Math.log(base));
  }
- 
  
  
  

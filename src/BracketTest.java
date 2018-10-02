@@ -27,14 +27,13 @@ class BracketTest {
   teams.add(new Team("G"));
   teams.add(new Team("H"));
   
-  teams.add(new Team("I"));
   
   generator = new DoubleGenerator(teams);
 
   DoubleBracket bracket = (DoubleBracket)generator.getBracket();
 
 
-  String[][] thing = bracket.getTeamsInMatch(3, 1);
+  String[][] thing = bracket.getTeamsInMatch(6, 1);
 
   System.out.println();
   
@@ -51,8 +50,6 @@ class BracketTest {
 	  System.out.println(thing[1][i]);
   }
 
-  
-\  
   
 
  }
