@@ -191,6 +191,8 @@ public class DoubleBracket extends Bracket{
 	 		return possibleTop;
 	 	}
 	 	
+	 	//if (matchNumber > )
+	 	
 	 	// 
 		 if ((matchNumber*2)-2 < round.get(roundNum-1).size()) {
 			 

@@ -88,7 +88,7 @@ class BracketTest {
 
   System.out.println("Top: ");
   
-  String[][] teamsInMatch = bracket.getTeamsInMatch(3, 2);
+  String[][] teamsInMatch = bracket.getTeamsInMatch(2, 2184102);
   
   for (int i = 0; i < teamsInMatch[0].length; i++) {
 	  System.out.println(teamsInMatch[0][i]);
