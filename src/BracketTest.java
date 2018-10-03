@@ -86,23 +86,24 @@ class BracketTest {
 
 
 
-  System.out.println("Top: ");
+  System.out.print("[ ");
   
-  String[][] teamsInMatch = bracket.getTeamsInMatch(2, 2184102);
+  String[][] teamsInMatch = bracket.getTeamsInMatch(1, 9);
   
   for (int i = 0; i < teamsInMatch[0].length; i++) {
-	  System.out.println(teamsInMatch[0][i]);
+	  System.out.print(teamsInMatch[0][i] + " ");
   }
   
-  System.out.println();
-  System.out.println("Bottom: ");
+  System.out.print("] vs. [ ");
 
   
   
   for (int i = 0; i < teamsInMatch[1].length; i++) {
-	  System.out.println(teamsInMatch[1][i]);
+	  System.out.print(teamsInMatch[1][i] + " ");
   }
   
+  System.out.print("]");
+
 
 
  }

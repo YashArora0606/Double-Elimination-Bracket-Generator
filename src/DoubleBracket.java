@@ -191,7 +191,12 @@ public class DoubleBracket extends Bracket{
 	 		return possibleTop;
 	 	}
 	 	
-	 	//if (matchNumber > )
+	 	if (matchNumber > this.getNumberOfMatchesInRound(roundNum)) {
+	 		
+	 		IndexOutOfBoundsException e = new IndexOutOfBoundsException();
+	 		e.printStackTrace();
+	 		return null;
+	 	}
 	 	
 	 	// 
 		 if ((matchNumber*2)-2 < round.get(roundNum-1).size()) {
