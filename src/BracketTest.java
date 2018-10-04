@@ -13,6 +13,8 @@ class BracketTest {
 
   ArrayList<Team> teams = new ArrayList<Team>();
   DoubleGenerator generator;
+  SingleGenerator singleGenerator;
+
   
   int numTeamsMade = 9;
 
@@ -21,10 +23,14 @@ class BracketTest {
   }
   
   generator = new DoubleGenerator(teams);
+  singleGenerator = new SingleGenerator(teams, false);
 
   DoubleBracket bracket = (DoubleBracket)generator.getBracket();
+  SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
+
   
-  //Display disp = new Display(bracket);
+  
+  Display disp = new Display(singleBracket);
 
   
   
