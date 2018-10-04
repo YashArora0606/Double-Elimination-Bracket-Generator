@@ -109,7 +109,7 @@ public class DoubleBracket extends Bracket{
   //System.out.println(round.get(0));
   //System.out.println("loser amount " + loserRound.get(1));
   numMatches = numMatchesWinners + numMatchesLosers;
-  return numMatches;  
+  return numMatchesWinners;  
  }
 
  @Override
@@ -158,16 +158,21 @@ public class DoubleBracket extends Bracket{
 		 
 		 
 		 
+	 } else if (roundNum <= 1 && matchNumber <= round.get(roundNum).size()){
+		String top = round.get(0).get((matchNumber*2)-2);
+		String bottom =round.get(0).get((matchNumber*2)-1);
+		 
+		teamsInMatch[0] = new String[] {top};
+		teamsInMatch[1] = new String[] {bottom};
+
+		 
 	 } else {
-		 String top = round.get(0).get((matchNumber*2)-2);
-		 String bottom =round.get(0).get((matchNumber*2)-1);
-		 
-			 teamsInMatch[0] = new String[] {top};
-
-		 
-			 teamsInMatch[1] = new String[] {bottom};
-
-		 
+			String top = round.get(0).get((matchNumber*2)-2);
+			
+			String bottom =round.get(0).get((matchNumber*2)-1);
+			 
+			teamsInMatch[0] = new String[] {top};
+			teamsInMatch[1] = new String[] {bottom};
 	 }
 
 	 
@@ -191,11 +196,9 @@ public class DoubleBracket extends Bracket{
 	 		return possibleTop;
 	 	}
 	 	
-	 	if (matchNumber > this.getNumberOfMatchesInRound(roundNum)) {
-	 		
-	 		IndexOutOfBoundsException e = new IndexOutOfBoundsException();
-	 		e.printStackTrace();
-	 		return null;
+	 	System.out.println("THIS: " + round.get(roundNum).size());
+	 	if (matchNumber > round.get(roundNum).size()) {
+	 		return possibleTop;
 	 	}
 	 	
 	 	// 
@@ -393,6 +396,26 @@ public class DoubleBracket extends Bracket{
    return p;
    
  }
+ 
+  public int calcNumberOfMatchLosers(int roundNumber) {
+	  int totalTeamsIncludingByes = nextPowerOftwo(teams.size());
+	  int divideBy;
+	  if (roundNumber%2 == 0) {
+		  divideBy = (int) Math.pow(2.0, (double) (roundNumber/2));
+	  } else {
+		  divideBy = (int) Math.pow(2.0, (double) ((roundNumber+1)/2));
+	  }
+	  return totalTeamsIncludingByes/divideBy;
+  }
+  
+  public String getTournamentWinner() {
+	  // if noone won, null
+	  // else return tournament winner
+	  
+
+	  
+	  return null;
+  }
  
  
  
