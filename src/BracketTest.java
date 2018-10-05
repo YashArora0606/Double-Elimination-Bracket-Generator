@@ -12,7 +12,7 @@ class BracketTest {
  public static void main(String[] args) {
 
   ArrayList<Team> teams = new ArrayList<Team>();
-  //DoubleGenerator generator;
+  DoubleGenerator generator;
   //SingleGenerator singleGenerator;
 
   
@@ -22,24 +22,15 @@ class BracketTest {
 //   teams.add(new Team(Character.toString(((char)(65+i)))  ) );
 //  }
   
-  //generator = new DoubleGenerator(teams);
+  generator = new DoubleGenerator(teams);
   //singleGenerator = new SingleGenerator(teams, false);
 
-  //DoubleBracket bracket = (DoubleBracket)generator.getBracket();
+  DoubleBracket bracket = (DoubleBracket)generator.getBracket();
   //SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
 
-  ManagementSystem managementSystem = new ManagementSystem();
+  //ManagementSystem managementSystem = new ManagementSystem();
   
   //Display disp = new Display(singleBracket);
-
-  
-  
-   //void setMatchWinner(String teamName, int roundNum, int matchNumber) {  
-  /*
-  for(int i = 0; i<4; i++){
-    bracket.setMatchWinner(Integer.toString(i*2), 1, i+1);
-  }
-  */
   
   
   bracket.setMatchWinner("H", 1, 8);
@@ -178,31 +169,6 @@ class BracketTest {
 //  System.out.println("");
   
  
-<<<<<<< HEAD
-=======
-
-
-  
-//  String[][] teamsInMatch = bracket.getTeamsInMatch(1, 8);
-//  
-//  for (int i = 0; i < teamsInMatch[0].length; i++) {
-//	  System.out.println(teamsInMatch[0][i] + " ");
-//  }
-//  
-//  System.out.println("\nvs.\n");
-//
-//  
-//  
-//  for (int i = 0; i < teamsInMatch[1].length; i++) {
-//	  System.out.println(teamsInMatch[1][i] + " ");
-//  }
->>>>>>> 6c934c6002c142b9a31d9bfba956d515abec1226
-  
-  
-//  
-//  for (int i = 0; i < bracket.getNumberOfRounds(); i++) {
-//   System.out.println(bracket.calcNumberOfMatchLosers(i+1));
-//  }
 
   
 
