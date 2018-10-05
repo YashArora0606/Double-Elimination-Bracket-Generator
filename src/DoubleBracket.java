@@ -127,9 +127,11 @@ public class DoubleBracket extends Bracket{
   int matchesSkippedLosers = (int)(Math.ceil(matchesSkippedWinners/2.0));
 */
   numMatches = numMatchesWinners + numMatchesLosers;
+
  
   return numMatches; 
   
+
  }
 
  @Override
@@ -164,7 +166,6 @@ public class DoubleBracket extends Bracket{
     teamsInMatch[0][i] = possibleBottom.get(i);
    }
    
-
 //   for (int i = 0; i < teamsInMatch[1].length; i++) {
 //    if (teamsInMatch[1][i] != "BYE") {
 //     teamsInMatch[1][i] = possibleTop.get(i);
@@ -178,16 +179,21 @@ public class DoubleBracket extends Bracket{
    
    
    
+  } else if (roundNum <= 1 && matchNumber <= round.get(roundNum).size()){
+  String top = round.get(0).get((matchNumber*2)-2);
+  String bottom =round.get(0).get((matchNumber*2)-1);
+   
+  teamsInMatch[0] = new String[] {top};
+  teamsInMatch[1] = new String[] {bottom};
+
+   
   } else {
    String top = round.get(0).get((matchNumber*2)-2);
+   
    String bottom =round.get(0).get((matchNumber*2)-1);
-   
-    teamsInMatch[0] = new String[] {top};
-
-   
-    teamsInMatch[1] = new String[] {bottom};
-
-   
+    
+   teamsInMatch[0] = new String[] {top};
+   teamsInMatch[1] = new String[] {bottom};
   }
 
   
@@ -204,6 +210,7 @@ public class DoubleBracket extends Bracket{
  }
  
  ArrayList<String> findPossTop(int roundNum, int matchNumber) {
+
   ArrayList<String> possibleTop = new ArrayList<String>();  
     
    // If it gets to round 0, no teams are playing, so an empty array is returned
@@ -211,7 +218,10 @@ public class DoubleBracket extends Bracket{
     return possibleTop;
    }
    
-   //if (matchNumber > )
+   System.out.println("THIS: " + round.get(roundNum).size());
+   if (matchNumber > round.get(roundNum).size()) {
+    return possibleTop;
+   }
    
    // 
    if ((matchNumber*2)-2 < round.get(roundNum-1).size()) {
@@ -397,6 +407,7 @@ public class DoubleBracket extends Bracket{
    }
    return totalTeamsIncludingByes/divideBy;
   }
+
  
 
 }
