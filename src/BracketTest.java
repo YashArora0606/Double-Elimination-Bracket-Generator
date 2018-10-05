@@ -12,25 +12,25 @@ class BracketTest {
  public static void main(String[] args) {
 
   ArrayList<Team> teams = new ArrayList<Team>();
-  DoubleGenerator generator;
-  SingleGenerator singleGenerator;
+  //DoubleGenerator generator;
+  //SingleGenerator singleGenerator;
 
   
-  int numTeamsMade = 9;
-
-  for (int i = 0; i < numTeamsMade; i++) {
-   teams.add(new Team(Character.toString(((char)(65+i)))  ) );
-  }
+//  int numTeamsMade = 9;
+//
+//  for (int i = 0; i < numTeamsMade; i++) {
+//   teams.add(new Team(Character.toString(((char)(65+i)))  ) );
+//  }
   
-  generator = new DoubleGenerator(teams);
-  singleGenerator = new SingleGenerator(teams, false);
+  //generator = new DoubleGenerator(teams);
+  //singleGenerator = new SingleGenerator(teams, false);
 
-  DoubleBracket bracket = (DoubleBracket)generator.getBracket();
-  SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
+  //DoubleBracket bracket = (DoubleBracket)generator.getBracket();
+  //SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
 
+  ManagementSystem managementSystem = new ManagementSystem();
   
-  
-  Display disp = new Display(singleBracket);
+  //Display disp = new Display(singleBracket);
 
   
   
@@ -178,6 +178,25 @@ class BracketTest {
 //  System.out.println("");
   
  
+<<<<<<< HEAD
+=======
+
+
+  
+//  String[][] teamsInMatch = bracket.getTeamsInMatch(1, 8);
+//  
+//  for (int i = 0; i < teamsInMatch[0].length; i++) {
+//	  System.out.println(teamsInMatch[0][i] + " ");
+//  }
+//  
+//  System.out.println("\nvs.\n");
+//
+//  
+//  
+//  for (int i = 0; i < teamsInMatch[1].length; i++) {
+//	  System.out.println(teamsInMatch[1][i] + " ");
+//  }
+>>>>>>> 6c934c6002c142b9a31d9bfba956d515abec1226
   
   
 //  
