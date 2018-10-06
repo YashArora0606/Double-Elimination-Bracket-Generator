@@ -43,4 +43,6 @@ public abstract class Bracket {
  
  abstract int getMatchBracket(int round, int matchNumber);
  
+ abstract public String getTournamentWinner();
+ 
 }
