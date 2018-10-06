@@ -39,6 +39,8 @@ public class ManagementSystem {
     private GraphicsPanel canvas;
     private BufferedImage background;
 
+    private final int MOVE_DOWN_CUSTOM = 50;
+    
     //JPanels
     private JPanel westPanel;
     private JPanel eastPanel;
@@ -301,7 +303,7 @@ public class ManagementSystem {
         leftBlank2 = new JLabel("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯");
         leftBlank2.setForeground(Color.WHITE);
         f.gridx = 0;
-        f.gridy = 3;
+        f.gridy = 3 + MOVE_DOWN_CUSTOM;
         f.gridwidth = 3;
         leftMainPanel.add(leftBlank2, f);
 
@@ -324,7 +326,7 @@ public class ManagementSystem {
         generateUnseededSinglesButton.setHorizontalTextPosition(SwingConstants.CENTER);
         f.anchor = GridBagConstraints.LINE_START;
         f.gridx = 0;
-        f.gridy = 4;
+        f.gridy = 4 + MOVE_DOWN_CUSTOM;
         f.gridwidth = 1;
         leftMainPanel.add(generateUnseededSinglesButton, f);
 
@@ -362,7 +364,7 @@ public class ManagementSystem {
         generateSeededSinglesButton.setContentAreaFilled(false);
         generateSeededSinglesButton.setBorderPainted(false);
         f.gridx = 1;
-        f.gridy = 4;
+        f.gridy = 4 + MOVE_DOWN_CUSTOM;
         f.anchor = GridBagConstraints.CENTER;
         leftMainPanel.add(generateSeededSinglesButton, f);
 
@@ -403,7 +405,7 @@ public class ManagementSystem {
         generateDoublesButton.setVerticalTextPosition(SwingConstants.CENTER);
         generateDoublesButton.setHorizontalTextPosition(SwingConstants.CENTER);
         f.gridx = 2;
-        f.gridy = 4;
+        f.gridy = 4 + MOVE_DOWN_CUSTOM;
         f.anchor = GridBagConstraints.LINE_END;
         leftMainPanel.add(generateDoublesButton, f);
 
