@@ -71,8 +71,7 @@ public class DoubleBracket extends Bracket {
 			round.get(0).add((i * 2) - 1, "BYE");
 		}
 
-		for (int i = 1; i <= numRounds; i++) { // roundnumber 1,2 >> numteams/2 || 3,4 >> numteams/4 || 5,6 >> 8
-			// int number = (int)Math.((((numRounds-i))+1)/2);
+		for (int i = 1; i <= numRounds; i++) { 
 
 			for (int j = 0; j < calcNumberOfTeamsLosers(i); j++) {// +1 incase its odd
 				loserRound.get(i - 1).add("?");
@@ -399,7 +398,7 @@ public class DoubleBracket extends Bracket {
 				round.get(roundNum + 1).set(matchNumber - 1, teamName);
 
      		if (roundNum == 0) {
-					// add losing team to losers bracker
+					// add losing team to losers bracket
 					int index = matchNumber - 1;
 
 					if (round.get(roundNum).get(matchNumber * 2 - 2).equals(teamName)) {

@@ -2,6 +2,7 @@
 
 public class Team{
   private String name;
+  private String seed;
   
   // constructors
   Team(String name){

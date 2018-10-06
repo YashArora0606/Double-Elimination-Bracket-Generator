@@ -12,13 +12,21 @@ class BracketTest {
 		DoubleGenerator generator;
 		// SingleGenerator singleGenerator;
 
-		int numTeamsMade = 9;
+		int numTeamsMade = 15;
 
-  	for (int i = 0; i < numTeamsMade; i++) {
-			teams.add(new Team(Character.toString(((char) (65 + i)))));
+		for (int i = 0; i < numTeamsMade; i++) {
+			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
 		}
 
-		generator = new DoubleGenerator(teams);
+		// generate without seeds
+
+		// generator = new DoubleGenerator(teams,false);
+		// generate with seeds
+		generator = new DoubleGenerator(teams, true);
+
+		for (int i = 0; i < teams.size(); i++) {
+			System.out.println(teams.get(i).getSeed());
+		}
 		// singleGenerator = new SingleGenerator(teams, false);
 
 		DoubleBracket bracket = (DoubleBracket) generator.getBracket();
@@ -28,41 +36,31 @@ class BracketTest {
 
 		// Display disp = new Display(bracket);
 
-		bracket.setMatchWinner("H", 1, 1);
-		
-		bracket.setMatchWinner("E", 2, 3);
-		bracket.setMatchWinner("G", 2, 4);
-		bracket.setMatchWinner("A", 2, 1);
-		bracket.setMatchWinner("C", 2, 2);
-		
-		
-	     bracket.setMatchWinner("I", 2, 5);
-		
-	   bracket.setMatchWinner("E", 3, 2);
-		bracket.setMatchWinner("A", 3, 1);
-		
-
-		bracket.setMatchWinner("F", 3, 4);
-		bracket.setMatchWinner("B", 3, 3);
-		
- 	
-		bracket.setMatchWinner("C", 4, 2);
-		bracket.setMatchWinner("G", 4, 3);
-		
-		bracket.setMatchWinner("C", 5, 1);
-		
-		bracket.setMatchWinner("A", 4, 1);
-		
-		bracket.setMatchWinner("C", 6, 1);
-		
-		bracket.setMatchWinner("A", 5, 1);
-   
-
-		
-
-		
-
-		
+		/*
+		 * bracket.setMatchWinner("H", 1, 1);
+		 * 
+		 * bracket.setMatchWinner("E", 2, 3); bracket.setMatchWinner("G", 2, 4);
+		 * bracket.setMatchWinner("A", 2, 1); bracket.setMatchWinner("C", 2, 2);
+		 * 
+		 * 
+		 * bracket.setMatchWinner("I", 2, 5);
+		 * 
+		 * bracket.setMatchWinner("E", 3, 2); bracket.setMatchWinner("A", 3, 1);
+		 * 
+		 * 
+		 * bracket.setMatchWinner("F", 3, 4); bracket.setMatchWinner("B", 3, 3);
+		 * 
+		 * 
+		 * bracket.setMatchWinner("C", 4, 2); bracket.setMatchWinner("G", 4, 3);
+		 * 
+		 * bracket.setMatchWinner("C", 5, 1);
+		 * 
+		 * bracket.setMatchWinner("A", 4, 1);
+		 * 
+		 * bracket.setMatchWinner("C", 6, 1);
+		 * 
+		 * bracket.setMatchWinner("A", 5, 1);
+		 */
 
 		// 8 teams
 		/*
@@ -106,7 +104,7 @@ class BracketTest {
 		System.out.println("loserRound5 " + bracket.loserRound.get(4));
 		System.out.println("loserRound6 " + bracket.loserRound.get(5));
 		System.out.println("loserRound7 " + bracket.loserRound.get(6));
-		System.out.println("loserRound8 " + bracket.loserRound.get(7));
+		// System.out.println("loserRound8 " + bracket.loserRound.get(7));
 
 		/*
 		 * System.out.println("winnerRound4 " + bracket.round.get(3));
@@ -131,9 +129,8 @@ class BracketTest {
 		 * System.out.println(bracket.getMatchBracket(1,2));
 		 */
 
- System.out.println(bracket.getNumberOfMatchesInRound(2));
- System.out.println(bracket.getTournamentWinner());
-
+		System.out.println(bracket.getNumberOfMatchesInRound(2));
+		System.out.println(bracket.getTournamentWinner());
 
 //  System.out.println("winnerRound " + bracket.round.get(0));   
 //  System.out.println("loserRound " + bracket.loserRound.get(0));
