@@ -8,8 +8,19 @@ public class DoubleGenerator extends Generator {
 	DoubleGenerator(ArrayList<Team> teams, boolean seed) {
 
 		if (seed) {
+			DoubleBracket.seed = true; 
+			//add BYES as teams and assign a value of Seed
+			int numByes = DoubleBracket.nextPowerOftwo(teams.size()) - teams.size();
+			for(int i = 0; i<numByes; i++) {
+				teams.add(new Team("BYE",Integer.MAX_VALUE-i));
+			}
+			
 			Collections.sort(teams);
+				
 			teams = teamsSeeded(teams);
+			
+			
+			
 			teams = teamsReverse(teams);
 		}
 
@@ -21,6 +32,7 @@ public class DoubleGenerator extends Generator {
 
 		ArrayList<Team> teamSecond = new ArrayList<Team>();
 		ArrayList<Team> newTeam = new ArrayList<Team>();
+		
 		for(int i = teams.size()/2; i<teams.size(); i++) {
 			teamSecond.add(teams.get(i));
 
