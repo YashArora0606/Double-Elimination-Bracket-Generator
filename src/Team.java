@@ -1,6 +1,5 @@
-
-
 public class Team{
+  
   private String name;
   
   // constructors
@@ -9,11 +8,12 @@ public class Team{
   }
   
   
-}
+
 
 public String getName() {
   return name;
 }
+
 }
 
 

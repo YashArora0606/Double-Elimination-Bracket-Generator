@@ -1,8 +1,4 @@
-
-
 import java.util.ArrayList;
-import java.lang.*;
-
 class BracketTest {
   
    static double log(int x, int base) {
