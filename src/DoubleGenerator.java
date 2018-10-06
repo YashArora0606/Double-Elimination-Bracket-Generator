@@ -29,7 +29,7 @@ public class DoubleGenerator extends Generator {
 		for(int i = 0; i<teams.size()/2; i++) {
 			newTeam.add(teams.get(i));
 		}
-		
+	
 		Collections.reverse(teamSecond);
 		
 		for(int i = 0; i<teamSecond.size(); i++) {

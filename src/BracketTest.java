@@ -12,7 +12,7 @@ class BracketTest {
 		DoubleGenerator generator;
 		// SingleGenerator singleGenerator;
 
-		int numTeamsMade = 15;
+		int numTeamsMade = 8;
 
 		for (int i = 0; i < numTeamsMade; i++) {
 			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
@@ -25,7 +25,7 @@ class BracketTest {
 		generator = new DoubleGenerator(teams, true);
 
 		for (int i = 0; i < teams.size(); i++) {
-			System.out.println(teams.get(i).getSeed());
+			System.out.println(teams.get(i).getName() + " " +teams.get(i).getSeed());
 		}
 		// singleGenerator = new SingleGenerator(teams, false);
 
@@ -95,7 +95,7 @@ class BracketTest {
 		System.out.println("winnerRound4 " + bracket.round.get(3));
 		System.out.println("winnerRound5 " + bracket.round.get(4));
 		System.out.println("winnerRound6 " + bracket.round.get(5));
-		System.out.println("winnerRound7 " + bracket.round.get(6));
+		//System.out.println("winnerRound7 " + bracket.round.get(6));
 
 		System.out.println("loserRound " + bracket.loserRound.get(0));
 		System.out.println("loserRound2 " + bracket.loserRound.get(1));
@@ -103,7 +103,7 @@ class BracketTest {
 		System.out.println("loserRound4 " + bracket.loserRound.get(3));
 		System.out.println("loserRound5 " + bracket.loserRound.get(4));
 		System.out.println("loserRound6 " + bracket.loserRound.get(5));
-		System.out.println("loserRound7 " + bracket.loserRound.get(6));
+		//System.out.println("loserRound7 " + bracket.loserRound.get(6));
 		// System.out.println("loserRound8 " + bracket.loserRound.get(7));
 
 		/*

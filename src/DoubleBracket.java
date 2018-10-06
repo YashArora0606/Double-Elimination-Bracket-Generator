@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DoubleBracket extends Bracket {
 
@@ -67,6 +68,7 @@ public class DoubleBracket extends Bracket {
 
 		int numByes = nextPowerOftwo(teams.size()) - teams.size();
 
+		//calculate to add byes from middle of bracket
 		for (int i = 1; i <= numByes; i++) {
 			round.get(0).add((i * 2) - 1, "BYE");
 		}
@@ -561,6 +563,28 @@ public class DoubleBracket extends Bracket {
 	@Override
 	public String getTournamentWinner() {	
 		return tournamentWinner;
+	}
+	
+	private ArrayList<Team> teamsReverse(ArrayList<Team> teams) {
+
+		ArrayList<Team> teamSecond = new ArrayList<Team>();
+		ArrayList<Team> newTeam = new ArrayList<Team>();
+		for(int i = teams.size()/2; i<teams.size(); i++) {
+			teamSecond.add(teams.get(i));
+
+		}
+		
+		for(int i = 0; i<teams.size()/2; i++) {
+			newTeam.add(teams.get(i));
+		}
+		
+		Collections.reverse(teamSecond);
+		
+		for(int i = 0; i<teamSecond.size(); i++) {
+			newTeam.add(teamSecond.get(i));
+		}
+		
+		return newTeam;
 	}
 }
 
