@@ -1,5 +1,11 @@
+/**
+ * [DoubleBracket.java]
+ * Bracket for double elimination, updates bracket as tournament progress 
+ * Authors: Jason Wang and Yash Arora 
+ * September 19, 2018
+ */
+
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DoubleBracket extends Bracket {
 
@@ -16,6 +22,7 @@ public class DoubleBracket extends Bracket {
 	boolean finals = false;
 	static boolean seed = false; 
 	String tournamentWinner = null;
+	boolean inWinnersBracket; 
 
 	// ArrayList<Team>[] round;
 	ArrayList<ArrayList<String>> round;
@@ -112,25 +119,36 @@ public class DoubleBracket extends Bracket {
   			}
   		}
   	}
-      
-		
-		
-			
+      		
 
 	}
 
-	// DONE
+	/**
+	 * getNumberOfTeams
+	 * This method returns number of teams in tournament
+	 * @return numTeams, an integer representing number of teams in tournament 
+	 */
 	@Override
 	int getNumberOfTeams() {
 		return numTeams;
 	}
 
-	// DONE
+	/**
+	 * getNumberOfRounds
+	 * This method returns number of rounds in the tournament
+	 * @return numRounds,  an integer representing number of rounds in tournament 
+	 */
 	@Override
 	int getNumberOfRounds() {
 		return numRounds;
 	}
-
+	
+	/**
+	 * getNumberOfMatchesInRound
+	 * This method returns number of matches in given round
+	 * @param round, An integer representing round number
+	 * @return numMatches, an integer of how many matches are in the round 
+	 */
 	@Override
 	int getNumberOfMatchesInRound(int roundNum) {
 		numMatchesWinners = (int) Math.floor((round.get(roundNum - 1).size()) / 2);
@@ -151,7 +169,14 @@ public class DoubleBracket extends Bracket {
 		return numMatches;
 
 	}
-
+	
+	/**
+	 * getTeamsInMatch
+	 * This method returns the teams that could possibly play in a match
+	 * @param round, an integer representing the round number
+	 * @param matchNumber, an integer representing the matchNumber 
+	 * @return teamsInMatch, a 2D array of String that contains all the possible teams that can play in the given match
+	 */
 	@Override
 	String[][] getTeamsInMatch(int roundNum, int matchNumber) {
 
@@ -399,14 +424,20 @@ public class DoubleBracket extends Bracket {
 		}
 
 	}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * setMatchWinner
+	 * This method updates the tournament bracket once a winner has been determined
+	 * @param teamName, a string representing the winning team name 
+	 * @param round, a integer representing the winner round number
+	 * @param matchNumber, a integer representing the winner match number
+	 */
 	@Override
 	void setMatchWinner(String teamName, int roundNum, int matchNumber) {
 
 		int roundSize = round.get(roundNum - 1).size();
 
-		boolean inWinnersBracket;
+		
 		if ((matchNumber + numMatchesSkipped(roundNum, true)) * 2 <= roundSize) {
 			inWinnersBracket = true;
 		} else {
@@ -514,9 +545,19 @@ public class DoubleBracket extends Bracket {
 		}
 	}
 
+	/**
+	 * getMatchBracket
+	 * This method returns whether the entered match is in the winners of loser bracket 
+	 * @param round, an integer representing the round number
+	 * @param matchNumber, an integer representing the match number
+	 * @return return 0 if match is in winners bracket and return -1 if matchNumber is in loser bracket
+	 */
 	@Override
 	int getMatchBracket(int roundNum, int matchNumber) {
 
+		
+		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
+		
 		if (matchNumber * 2 <= round.get(roundNum - 1).size()) {
 			return 0;
 
@@ -530,10 +571,23 @@ public class DoubleBracket extends Bracket {
 		return -1;
 	}
 
+	/**
+	 * log
+	 * This method calculates log to a certain base 
+	 * @param x, an integer to be logged
+	 * @param base. an integer representing the base of the log
+	 * @return a value after logged to a certain base 
+	 */
 	static double log(int x, int base) {
 		return (double) (Math.log(x) / Math.log(base));
 	}
 
+	/**
+	 * nextPowerOftwo
+	 * This method calculates the bracket size by finding the nearest power of 2 based of n
+	 * @param n, an integer based off of to find the next power of 2 
+	 * @return p, a integer representing the nearest power of two based of n
+	 */
 	static int nextPowerOftwo(int n) {
 		int p = 1;
 		if (n > 0 && (n & (n - 1)) == 0) {
@@ -546,6 +600,12 @@ public class DoubleBracket extends Bracket {
 
 	}
 
+	/**
+	 * calcNumberOfTeamsLosers
+	 * This method calculates number of teams in loser round based of a round number
+	 * @param roundNum, an integer representing the round number 
+	 * @return totalTeamsIncludingByes / divideBy, a integer representing number of teams in loser round
+	 */
 	public int calcNumberOfTeamsLosers(int roundNumber) {
 		int totalTeamsIncludingByes = nextPowerOftwo(teams.size());
 		int divideBy;
@@ -557,6 +617,13 @@ public class DoubleBracket extends Bracket {
 		return totalTeamsIncludingByes / divideBy;
 	}
 
+	/**
+	 * numMatchesSkipped
+	 * This method returns the number of matches skipped because of byes
+	 * @param roundNum, an integer representing the round number 
+	 * @param winnersRound, a boolean value determine if the match is in winners bracket or not 
+	 * @return numByesW if in winners round , numByesW + numByesW if not in winners round, an integer representing number of matches skipped
+	 */
 	public int numMatchesSkipped(int roundNum, boolean winnersRound) {
 
 		int numByesW = 0;
@@ -588,30 +655,15 @@ public class DoubleBracket extends Bracket {
 
 	}
 
+	/**
+	 * getTournamentWinner
+	 * This method returns the winner of the whole tournament
+	 * @return tournamentWinner, a string representing the winner of the tournament
+	 */
 	@Override
 	public String getTournamentWinner() {
 		return tournamentWinner;
 	}
 
-	private ArrayList<Team> teamsReverse(ArrayList<Team> teams) {
 
-		ArrayList<Team> teamSecond = new ArrayList<Team>();
-		ArrayList<Team> newTeam = new ArrayList<Team>();
-		for (int i = teams.size() / 2; i < teams.size(); i++) {
-			teamSecond.add(teams.get(i));
-
-		}
-
-		for (int i = 0; i < teams.size() / 2; i++) {
-			newTeam.add(teams.get(i));
-		}
-
-		Collections.reverse(teamSecond);
-
-		for (int i = 0; i < teamSecond.size(); i++) {
-			newTeam.add(teamSecond.get(i));
-		}
-
-		return newTeam;
-	}
 }
