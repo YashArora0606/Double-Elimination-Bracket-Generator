@@ -505,17 +505,17 @@ public class DoubleBracket extends Bracket {
 			// Doing finals
 			if (roundNum == initalRounds) {
 				if (teamName.equals(round.get(roundNum).get(0))) {
+					//if winner of winner bracket wins finals update bracket and set tournament winner
 					round.get(roundNum + 1).add(teamName);
 					tournamentWinner = teamName;
 				} else if (teamName.equals(round.get(roundNum).get(1))) {
-					round.get(roundNum + 1).add(teamName);
-					
-					loserRound.get(numRounds - 2).set(0, round.get(roundNum).get(0));
-					
+				   //if winner of loser bracket wins finals update bracket with winners and losers and have a rematch in bonus round
+					round.get(roundNum + 1).add(teamName);				
+					loserRound.get(numRounds - 2).set(0, round.get(roundNum).get(0));				
 					round.get(roundNum + 1).add(round.get(roundNum).get(0));
 				}
 			} else {
-
+				//if bonus round occurs, after winner is set update bracket and set tournament winner
 				round.get(numRounds - 2).add(teamName);
 				tournamentWinner = teamName;
 			}
@@ -538,19 +538,15 @@ public class DoubleBracket extends Bracket {
 	 */
 	@Override
 	int getMatchBracket(int roundNum, int matchNumber) {
-
 		
+		//calculate match number including BYES 
 		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
 		
 		if (matchNumber * 2 <= round.get(roundNum - 1).size()) {
-			return 0;
-
+			return 0; // if winners bracket then 0
 		} else if (matchNumber * 2 <= (round.get(roundNum - 1).size() + loserRound.get(roundNum - 1).size())) {
-			return 1;
+			return 1; // if losers bracket then 1
 		}
-
-		// if losers bracket then 1
-		// if winners bracket then 0
 
 		return -1;
 	}
