@@ -7,6 +7,7 @@
 
 import java.util.ArrayList;
 
+
 public class DoubleBracket extends Bracket {
 
 	ArrayList<Team> teams;
@@ -38,28 +39,29 @@ public class DoubleBracket extends Bracket {
 
 		// Calculate number of rounds
 		double L2 = log(teams.size(), 2);
-		initalRounds = (int) Math.ceil(L2);
-		int surplusRounds = (int) (Math.ceil(log((int) L2, 2)));
-		numRounds = initalRounds + surplusRounds + 1 + 1;
+		initalRounds = (int) Math.ceil(L2); //Initial rounds represents rounds in winners bracket
+		int surplusRounds = (int) (Math.ceil(log((int) L2, 2))); //Surplus rounds represent rounds the extra rounds 
+		numRounds = initalRounds + surplusRounds + 1 + 1; // add 2 to account for the extra possible bonus round, and to double count finals
 
+		//create arrayLists of arrayLists one for loserRound one fore winnerRound 
+		//use array lists for easy use and easy access
 		round = new ArrayList<ArrayList<String>>(numRounds);
 		loserRound = new ArrayList<ArrayList<String>>(numRounds);
 
+		
 		// Every round is an ArrayList of the teams that play in the round
 		for (int i = 0; i < numRounds; i++) {
 			ArrayList<String> indArr = new ArrayList<String>();
 			round.add(indArr);
-			// loserRound.add(indArr);
 		}
 
 		for (int i = 0; i < numRounds; i++) {
 			ArrayList<String> indArr = new ArrayList<String>();
 			loserRound.add(indArr);
 		}
+	
 
-		// Add teams to the very first round
-
-		// add placeHolders for the winners round
+		// add placeHolders for the winners round enables the round to be played in any match number order
 		int previousSize = nextPowerOftwo(teams.size()) / 2;
 		for (int i = 1; i <= initalRounds; i++) {
 
@@ -67,50 +69,43 @@ public class DoubleBracket extends Bracket {
 				round.get(i).add("?");
 			}
 			previousSize = previousSize / 2;
-
 		}
 
+		//add teams in to the first round
 		for (int i = 0; i < teams.size(); i++) {
 			round.get(0).add(i, teams.get(i).getName());
 		}
 
+		//calculate number of BYES that is needed 
 		int numByes = nextPowerOftwo(teams.size()) - teams.size();
 
-		// Add byes into
-
+		// Add byes into the first round 
 		for (int i = 1; i <= numByes; i++) {
 			round.get(0).add((i * 2) - 1, "BYE");
 		}
 
 		for (int i = 1; i <= numRounds; i++) {
-
-			for (int j = 0; j < calcNumberOfTeamsLosers(i); j++) {// +1 incase its odd
+			for (int j = 0; j < calcNumberOfTeamsLosers(i); j++) {
 				loserRound.get(i - 1).add("?");
 			}
 
 		}
 		
+	//automatically move byes down to the next round	
       if(seed) {
 		for (int i = 1; i <= (nextPowerOftwo(teams.size())/2); i++) {
-
-			if (round.get(0).get((i) - 1).equals("BYE")) {
-				
-				round.get(1).set((i - 1)/2, round.get(0).get((i - 2)));
-				
+			if (round.get(0).get((i) - 1).equals("BYE")) {		
+				round.get(1).set((i - 1)/2, round.get(0).get((i - 2)));			
 				loserRound.get(0).set((i - 1)/2, "BYE");
 			}
 		}
-		
-			
+				
 		for (int i = (nextPowerOftwo(teams.size())/2)+1; i <=(nextPowerOftwo(teams.size()))-1; i++) {
-
-			if (round.get(0).get((i) - 1).equals("BYE")) {
-				
-				round.get(1).set((i - 1)/2, round.get(0).get((i)));
-				
+			if (round.get(0).get((i) - 1).equals("BYE")) {			
+				round.get(1).set((i - 1)/2, round.get(0).get((i)));				
 				loserRound.get(0).set((i - 1)/2, "BYE");
 			}
-		}
+		}	
       }else if(!seed){
     	  for (int i = 1; i <= (nextPowerOftwo(teams.size()) / 2); i++) {
   			if (round.get(0).get((i * 2) - 1).equals("BYE")) {
@@ -140,7 +135,8 @@ public class DoubleBracket extends Bracket {
 	 */
 	@Override
 	int getNumberOfRounds() {
-		return numRounds;
+		//minus 1 because the final round is double counted 
+		return numRounds - 1;
 	}
 	
 	/**
@@ -154,17 +150,11 @@ public class DoubleBracket extends Bracket {
 		numMatchesWinners = (int) Math.floor((round.get(roundNum - 1).size()) / 2);
 		numMatchesLosers = (int) Math.floor(calcNumberOfTeamsLosers(roundNum)) / 2;
 
+		//Calculate number of byes in round
 		int numByes = numMatchesSkipped(roundNum, false);
 
+		//subtract number of byes as those do not count as matches
 		numMatches = numMatchesWinners + numMatchesLosers - numByes;
-
-		/*
-		 * // Eliminated extra added team to finals if (roundNum-1 == initalRounds) {
-		 * System.out.println("Subtracted"); numMatches = numMatches - 1; }
-		 * 
-		 * if (roundNum == numRounds - 2 || roundNum == numRounds - 1) {
-		 * System.out.println("Subtracted"); numMatches = 1; }
-		 */
 
 		return numMatches;
 
@@ -437,15 +427,13 @@ public class DoubleBracket extends Bracket {
 
 		int roundSize = round.get(roundNum - 1).size();
 
-		
 		if ((matchNumber + numMatchesSkipped(roundNum, true)) * 2 <= roundSize) {
 			inWinnersBracket = true;
 		} else {
 			inWinnersBracket = false;
 		}
 
-		// change matchNumber to match the bracket
-
+		// change matchNumber to match the bracket(including byes) 
 		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
 
 		// to change the value of roundNum to the index of the round
@@ -454,12 +442,12 @@ public class DoubleBracket extends Bracket {
 		if (!finals) {
 
 			if (inWinnersBracket) {
+				//update bracket with winning team
 				round.get(roundNum + 1).set(matchNumber - 1, teamName);
 
 				if (roundNum == 0) {
 					// add losing team to losers bracket
 					int index = matchNumber - 1;
-
 					if (round.get(roundNum).get(matchNumber * 2 - 2).equals(teamName)) {
 						loserRound.get(roundNum).set(index, (round.get(roundNum).get(matchNumber * 2 - 1)));
 					} else if (round.get(roundNum).get(matchNumber * 2 - 1).equals(teamName)) {
@@ -467,23 +455,21 @@ public class DoubleBracket extends Bracket {
 					}
 
 				} else {
-					// move losing teams down the the loserRound +1
-					addIndex = (matchNumber * 2) - 1;
-					// roundNum = 2
-					// add to loserRound 3
+					//move losing teams down to the loser round based on the round number
+					addIndex = (matchNumber * 2) - 1; //index of where the loser goes 
 					if (round.get(roundNum).get(matchNumber * 2 - 2).equals(teamName)) {
-						loserRound.get((roundNum - 1) * 2 + 1).set(addIndex,
-								(round.get(roundNum).get(matchNumber * 2 - 1)));
+						loserRound.get((roundNum - 1) * 2 + 1).set(addIndex, (round.get(roundNum).get(matchNumber * 2 - 1)));
 					} else if (round.get(roundNum).get(matchNumber * 2 - 1).equals(teamName)) {
-						loserRound.get((roundNum - 1) * 2 + 1).set(addIndex,
-								(round.get(roundNum).get(matchNumber * 2 - 2)));
+                        loserRound.get((roundNum - 1) * 2 + 1).set(addIndex,(round.get(roundNum).get(matchNumber * 2 - 2)));
 					}
 				}
 
 			}
+			
 			if (!inWinnersBracket) {
-
+				//update the loser round bracket and move on winners from loser bracket
 				if (roundNum % 2 == 0) {
+					//different index for where to add team based on round number
 					if (matchNumber != 1) {
 						addIndex = ((matchNumber * 2) - roundSize) - 2;
 					} else if (matchNumber == 1) {
@@ -492,6 +478,7 @@ public class DoubleBracket extends Bracket {
 					loserRound.get(roundNum + 1).set(addIndex, teamName);
 
 				} else if (roundNum % 2 == 1) {
+					//different index for where to add team based on round number
 					addIndex = (int) (matchNumber - Math.floor((roundSize) / 2) - 1);
 					loserRound.get(roundNum + 1).set(addIndex, teamName);
 				}
@@ -501,19 +488,14 @@ public class DoubleBracket extends Bracket {
 			if (loserRound.get(roundNum).contains("BYE")) {
 				for (int i = 1; i <= (calcNumberOfTeamsLosers(roundNum + 1)) / 2; i++) {
 					int matchNumberNew = i + (roundSize / 2);
-
-					if ((loserRound.get(roundNum).get(i * 2 - 2)).equals("BYE")
-							&& !loserRound.get(roundNum).get(i * 2 - 1).equals("?")) {
-
+					if ((loserRound.get(roundNum).get(i * 2 - 2)).equals("BYE") && !loserRound.get(roundNum).get(i * 2 - 1).equals("?")) {
 						if (roundNum % 2 == 0) {
 							int index = ((matchNumberNew * 2) - roundSize) - 2;
 							loserRound.get(roundNum + 1).set(index, loserRound.get(roundNum).get(i * 2 - 1));
-
 						} else if (roundNum % 2 == 1) {
 							int index = i - 1;
 							loserRound.get(roundNum + 1).set(index, loserRound.get(roundNum).get(i * 2 - 1));
 						}
-
 					}
 				}
 			}
@@ -527,7 +509,9 @@ public class DoubleBracket extends Bracket {
 					tournamentWinner = teamName;
 				} else if (teamName.equals(round.get(roundNum).get(1))) {
 					round.get(roundNum + 1).add(teamName);
-					loserRound.get(numRounds - 1).set(0, round.get(roundNum).get(0));
+					
+					loserRound.get(numRounds - 2).set(0, round.get(roundNum).get(0));
+					
 					round.get(roundNum + 1).add(round.get(roundNum).get(0));
 				}
 			} else {
@@ -537,9 +521,9 @@ public class DoubleBracket extends Bracket {
 			}
 
 		}
-
-		if (round.get(initalRounds).size() == 1 && loserRound.get(numRounds - 2).size() == 1
-				&& !loserRound.get(numRounds - 2).get(0).equals("?")) {
+		
+		//check if finals conditions has been reached
+		if (round.get(initalRounds).size() == 1 && !loserRound.get(numRounds - 3).get(0).equals("?")){		
 			finals = true;
 			round.get(initalRounds).add(teamName);
 		}

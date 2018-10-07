@@ -12,7 +12,7 @@ class BracketTest {
 		DoubleGenerator generator;
 		// SingleGenerator singleGenerator;
 
-		int numTeamsMade = 9;
+		int numTeamsMade = 7;
 
 		for (int i = 0; i < numTeamsMade; i++) {
 			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
@@ -41,6 +41,27 @@ class BracketTest {
 
 		// Display disp = new Display(bracket);
 
+		
+		bracket.setMatchWinner("E", 1, 1);
+		bracket.setMatchWinner("F", 1, 2);
+		bracket.setMatchWinner("G", 1, 3);
+		
+		bracket.setMatchWinner("F", 2, 2);
+		bracket.setMatchWinner("A", 2, 1);
+		
+		bracket.setMatchWinner("F", 3, 1);
+		
+		bracket.setMatchWinner("C", 1, 4);
+		
+		bracket.setMatchWinner("D", 2, 3);
+		bracket.setMatchWinner("C", 2, 4);
+		bracket.setMatchWinner("D", 3, 2);
+		bracket.setMatchWinner("D", 4, 1);
+		
+		bracket.setMatchWinner("D", 4, 1);
+		
+		bracket.setMatchWinner("D", 5, 1);
+		
 	   /*
 		 bracket.setMatchWinner("H", 1, 1);
 		 
@@ -136,11 +157,12 @@ class BracketTest {
 		 */
 
 		/*
-		 * System.out.println(); System.out.println(bracket.getNumberOfRounds());
+		 * System.out.println(); 
 		 * System.out.println(bracket.getNumberOfMatchesInRound(1));
 		 * System.out.println(bracket.getMatchBracket(1,2));
 		 */
-
+		
+		System.out.println(bracket.getNumberOfRounds());
 		System.out.println(bracket.getNumberOfMatchesInRound(2));
 		System.out.println(bracket.getTournamentWinner());
 
