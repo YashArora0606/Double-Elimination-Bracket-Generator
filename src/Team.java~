@@ -1,3 +1,22 @@
-public class Team {
 
+
+public class Team{
+  private String name;
+  private String seed;
+  
+  // constructors
+  Team(String name){
+    this.name = name;
+  }
+  
+  
 }
+
+public String getName() {
+  return name;
+}
+}
+
+
+
+
