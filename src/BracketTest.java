@@ -190,7 +190,7 @@ class BracketTest {
 //  System.out.println("");
   
   
-  String[][] teamsInMatch = bracket.getTeamsInMatch(2, 4);
+  String[][] teamsInMatch = bracket.getTeamsInMatch(2,5);
   
   
   

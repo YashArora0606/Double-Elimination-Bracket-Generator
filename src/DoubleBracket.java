@@ -160,41 +160,71 @@ public class DoubleBracket extends Bracket{
 
   
   if (inWinnersBracket) {
-	  System.out.println("YES WINNERS: ");
-	  
-	  System.out.println(roundSize);
+//	  System.out.println("YES WINNERS: ");
+//	  
+//	  System.out.println(roundSize);
 
 
 	  
 	  
 	  
-	  if (round.get(roundNum-1).get((matchNumber*2)-2) != null && !round.get(roundNum-1).get((matchNumber*2)-2).isEmpty()) {
+	  if (((matchNumber*2)-2) < round.get(roundNum-1).size() && round.get(roundNum-1).get((matchNumber*2)-2) != null && !round.get(roundNum-1).get((matchNumber*2)-2).isEmpty()) {
 		  
-
 		  alreadyFull1 = true;
 		  String top = round.get(roundNum-1).get((matchNumber*2)-2);
 		  teamsInMatch[0] = new String[] {top};
-		  System.out.println("TOP1: " + top);
+		  //System.out.println("TOP1: " + top);
 		  
 	  } 
 	  
-	  try {
 	  
-	  if (round.get(roundNum-1).get((matchNumber*2)-1) != null && !round.get(roundNum-1).get((matchNumber*2)-1).isEmpty()) {
+	  if (((matchNumber*2)-1) < round.get(roundNum-1).size() && round.get(roundNum-1).get((matchNumber*2)-1) != null && !round.get(roundNum-1).get((matchNumber*2)-1).isEmpty()) {
 		  alreadyFull2 = true;
 		  String bottom = round.get(roundNum-1).get((matchNumber*2)-1);
 		  teamsInMatch[1] = new String[] {bottom};
-		  System.out.println("BOT1: " + bottom);		  
+		  //System.out.println("BOT1: " + bottom);		  
 	  }
 	  
-	  } catch (NullPointerException e) {
-		  
-	  }
 	  
 	  if (alreadyFull1 && alreadyFull2) {
 		  return teamsInMatch;
 	  }
 	  
+	  // if in loser bracket
+  } else {
+	  
+	  int newTeamNumber = (matchNumber*2)-(roundSize+1);
+	  int newMatchNumber = (newTeamNumber + 1)/2;
+	  
+	  
+	  
+	  if (((newMatchNumber*2)-2) < loserRound.get(roundNum-1).size() && 
+			  loserRound.get(roundNum-1).get((newMatchNumber*2)-2) != null && 
+			  !loserRound.get(roundNum-1).get((newMatchNumber*2)-2).isEmpty() &&
+			  !loserRound.get(roundNum-1).get((newMatchNumber*2)-2).equals("?")) {
+		  
+		  alreadyFull1 = true;
+		  String top = loserRound.get(roundNum-1).get((newMatchNumber*2)-2);
+		  teamsInMatch[0] = new String[] {top};
+		  //System.out.println("TOP1: " + top);
+		  
+	  } 
+	  
+	  
+	  if (((newMatchNumber*2)-1) < loserRound.get(roundNum-1).size() && 
+			  loserRound.get(roundNum-1).get((newMatchNumber*2)-1) != null && 
+			  !loserRound.get(roundNum-1).get((newMatchNumber*2)-1).isEmpty() &&
+			  !loserRound.get(roundNum-1).get((newMatchNumber*2)-1).equals("?")) {
+		  alreadyFull2 = true;
+		  String bottom = loserRound.get(roundNum-1).get((newMatchNumber*2)-1);
+		  teamsInMatch[1] = new String[] {bottom};
+		  //System.out.println("BOT1: " + bottom);		  
+	  }
+	  
+	  
+	  if (alreadyFull1 && alreadyFull2) {
+		  return teamsInMatch;
+	  }
   }
   
 
