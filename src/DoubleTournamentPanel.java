@@ -84,12 +84,21 @@ public class DoubleTournamentPanel extends TournamentPanel {
         workingLoseY = BORDER_SPACE + winningHeight; //sets working y for the loser bracket to just below the winning height threshold
 
         //Drawing round 1
-        numMatches = tournament.getNumberOfMatchesInRound(1); //determines how many matches are in the round
-        if (numMatches > 1) {
-            verticalWinSpace = (winningHeight - (workingWinY * 2) - (boxHeight * numMatches)) / (numMatches - 1); //finds the space that it will not use and divides it between the spaces
-        } else {
-            workingWinY = winningHeight/2 - boxHeight /2 ;
+        numWinMatches = findNumMatches(1, 0); //determines how many matches are in the round
+        numLossMatches = findNumMatches(1, 1);
+
+        //If there is more than one match, calculates the space between each match for an evenly distributed look
+        if (numLossMatches > 1) {
+            verticalLoseSpace = (losingHeight - ((workingLoseY-winningHeight) * 2) - (boxHeight * numLossMatches)) / (numLossMatches - 1);
+        } else if (numLossMatches == 1){ //if there is only one match, sets the working Y to the center of the screen
+            workingLoseY = winningHeight + losingHeight/2 - boxHeight /2;
         }
+        if ((numWinMatches > 1)){
+            verticalWinSpace = (winningHeight - (workingWinY * 2) - (boxHeight * numWinMatches)) / (numWinMatches - 1);
+        } else if (numWinMatches == 1){ // if there is one match, sets the working Y to center, must be equal to one because the number of winning rounds could be 0
+            workingWinY = winningHeight/2 - boxHeight /2;
+        }
+
         drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, 0, 1, boxes); //draws the matchboxes
         workingX += boxLength + HORIZONTAL_SPACE;
 
@@ -99,9 +108,9 @@ public class DoubleTournamentPanel extends TournamentPanel {
             numLossMatches = findNumMatches(roundNum, 1); //determines the number of loser bracket matches
             numWinMatches = findNumMatches(roundNum, 0); //determines the number of winner bracket matches
 
-            if ((roundNum % 2 == 1) && (numWinMatches < findNumMatches(roundNum-2, 0))){ //if it has less rounds than the last, lower the y coordinate
+            if (numWinMatches < findNumMatches(roundNum-1, 0)){ //if it has less rounds than the last, lower the y coordinate
                 workingWinY += boxHeight/2 + verticalWinSpace/2; //adjusts the workingWinY int
-            } else if (((roundNum % 2 == 1) && (numWinMatches > findNumMatches(roundNum - 2, 0))) || ((roundNum == 2) && (numWinMatches > findNumMatches(1, 0)))){ //if it is more than the previous match reset to the top of the screen
+            } else if (numWinMatches > findNumMatches(roundNum - 1, 0)){ //if it is more than the previous match reset to the top of the screen
                 workingWinY = BORDER_SPACE;
             }
             if (numLossMatches < findNumMatches(roundNum-1, 1)){ //if it has less rounds than the last, lower the y coordinate
@@ -240,10 +249,12 @@ public class DoubleTournamentPanel extends TournamentPanel {
             }
 
             if (teams[0].length == 1) { //checking if the team playing is already determined
-//                if (((DoubleBracket)tournament).getWinnerOfMatch(roundNum, i+1) == teams[0][0]){ //if they're the winner, will bold the winner team's name
-//                    fontMetrics = g.getFontMetrics(font1);
-//                    g.setFont(boldFont);
-//                }
+               /*
+            	if (((DoubleBracket)tournament).getWinnerOfMatch(roundNum, i+1) == teams[0][0]){ //if they're the winner, will bold the winner team's name
+                    fontMetrics = g.getFontMetrics(font1);
+                    g.setFont(boldFont);
+                }
+                */
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
                 g.setFont(font1); //resets the font
                 fontMetrics = g.getFontMetrics(font1);
@@ -254,10 +265,12 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
             }
             if (teams[1].length == 1){ //checking if the team playing is already determined
-//                if (((DoubleBracket)tournament).getWinnerOfMatch(roundNum, i+1) == teams[1][0]){ //if they're the winner, will bold the winner team's name
-//                    fontMetrics = g.getFontMetrics(font1);
-//                    g.setFont(boldFont);
-//                }
+            	/*
+                if (((DoubleBracket)tournament).getWinnerOfMatch(roundNum, i+1) == teams[1][0]){ //if they're the winner, will bold the winner team's name
+                    fontMetrics = g.getFontMetrics(font1);
+                    g.setFont(boldFont);
+                }
+                */
                 g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
                 g.setFont(font1); //resets the font
                 fontMetrics = g.getFontMetrics(font1);
@@ -308,25 +321,22 @@ public class DoubleTournamentPanel extends TournamentPanel {
             for (int j = 0; j < boxes.get(i).length; j++) {
                 String[][] currTeams = tournament.getTeamsInMatch(i+1,j+1); //the teams from the current matchbox
                 String[][] nextTeams; //arbitrary string array for the teams in a match from the next round
-                int change = 2; //the value of how many rounds later it will be checking; if 2, will be checking the immediate next round (for loser bracket matches), if 3, will skip a round and check the second next round (for the winner bracket matches)
-                if ((tournament.getMatchBracket(i+1, j+1) == 0) && (findNumMatches(i+2, 0) == 0)){ //checking if the match is part of the winner bracket and if it is before the double finals matches
-                    change = 3;
-                }
+
                 for (int set = 0; set < 2; set++) { //iterates twice through, since there are two arrays to be checked in the current matchbox
-                    for (int matchNum = 1; matchNum <= boxes.get(i + change-1).length; matchNum++) {
-                        nextTeams = tournament.getTeamsInMatch(i + change, matchNum); //stores the teams which play in that match
+                    for (int matchNum = 1; matchNum <= boxes.get(i + 1).length; matchNum++) {
+                        nextTeams = tournament.getTeamsInMatch(i + 1, matchNum); //stores the teams which play in that match
                         for (int teamNum = 0; teamNum < 2; teamNum++) {  //iterates twice through, since there are two arrays to be checked in the next matchbox
                             if (( //checking if the teams playing is already determined
                                     (contains(nextTeams[teamNum], currTeams[set])) &&//checking if they feed into each other
-                                    (tournament.getMatchBracket(boxes.get(i)[j].getRound(), boxes.get(i)[j].getRoundIndex()) == tournament.getMatchBracket(boxes.get(i+change-1)[matchNum-1].getRound(), boxes.get(i+change-1)[matchNum-1].getRoundIndex())))) { //checking that the two matches are from the same bracket
-                                        drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + change - 1)[matchNum - 1], g);
-                                        g.drawLine(boxes.get(i + change-1)[matchNum -1 ].getX(), boxes.get(i + change-1)[matchNum -1 ].getMidY(), boxes.get(i + change-1)[matchNum -1 ].getX() - HORIZONTAL_SPACE / 2, boxes.get(i + change-1)[matchNum -1 ].getMidY());
-                                    }
-                                }
+                                            (tournament.getMatchBracket(boxes.get(i)[j].getRound(), boxes.get(i)[j].getRoundIndex()) == tournament.getMatchBracket(boxes.get(i+1)[matchNum-1].getRound(), boxes.get(i+1)[matchNum-1].getRoundIndex())))) { //checking that the two matches are from the same bracket
+                                drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i+1)[matchNum - 1], g);
+                                g.drawLine(boxes.get(i + 1)[matchNum -1 ].getX(), boxes.get(i + 1)[matchNum -1 ].getMidY(), boxes.get(i +1)[matchNum -1 ].getX() - HORIZONTAL_SPACE / 2, boxes.get(i + 1)[matchNum -1 ].getMidY());
                             }
                         }
                     }
                 }
+            }
+        }
 
         //drawLineBetweenMatch(boxes.get(tournament.getNumberOfRounds()-3)[1], boxes.get(tournament.getNumberOfRounds()-2)[0], g); //connects the last loser bracket match to the winner bracket (since winner of loser bracket plays the winner of the winner bracket)
     }

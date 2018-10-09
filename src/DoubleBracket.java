@@ -196,8 +196,7 @@ public class DoubleBracket extends Bracket {
 		boolean alreadyFull1 = false;
 		boolean alreadyFull2 = false;
 
-		System.out.println(inWinnersBracket);
-
+		
 		if (inWinnersBracket) {
 
 			if (round.get(roundNum - 1).get((matchNumber * 2) - 2) != null
@@ -508,6 +507,7 @@ public class DoubleBracket extends Bracket {
 		} else if (finals) {
 
 			// Doing finals
+			
 			if (roundNum == initalRounds) {
 				if (teamName.equals(round.get(roundNum).get(0))) {
 					// if winner of winner bracket wins finals update bracket and set tournament
