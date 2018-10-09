@@ -70,6 +70,7 @@ public class DoubleBracket extends Bracket {
 			}
 			previousSize = previousSize / 2;
 		}
+		round.get(initalRounds).add("?");
 
 		// add teams in to the first round
 		for (int i = 0; i < teams.size(); i++) {
@@ -191,23 +192,19 @@ public class DoubleBracket extends Bracket {
 		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
 		System.out.println(matchNumber);
 
-
 		String[][] teamsInMatch = new String[2][];
 
 		ArrayList<String> possibleTop = new ArrayList<String>();
 		ArrayList<String> possibleBottom = new ArrayList<String>();
 
-
-
-
 		boolean alreadyFull1 = false;
 		boolean alreadyFull2 = false;
-
 		
 		if (inWinnersBracket) {
 
-			if (round.get(roundNum - 1).get((matchNumber * 2) - 2) != "?"
-					&& !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()) {
+			if (((matchNumber * 2) - 2) < round.get(roundNum - 1).size()
+					&& !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()
+					&& round.get(roundNum - 1).get((matchNumber * 2) - 2) != "?") {
 
 				alreadyFull1 = true;
 				String top = round.get(roundNum - 1).get((matchNumber * 2) - 2);
@@ -248,6 +245,7 @@ public class DoubleBracket extends Bracket {
 
 			if (loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2) != null
 					&& !loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2).isEmpty()) {
+				
 
 				alreadyFull1 = true;
 				String top = loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2);
@@ -319,6 +317,7 @@ public class DoubleBracket extends Bracket {
 					teamsInMatch[1] = new String[] { bottom };
 
 				} else {
+					
 					possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2));
 					possibleBottom.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1));
 
@@ -552,7 +551,7 @@ public class DoubleBracket extends Bracket {
 		// check if finals conditions has been reached
 		if (round.get(initalRounds).size() == 1 && !loserRound.get(numRounds - 3).get(0).equals("?")) {
 			finals = true;
-			round.get(initalRounds).add(teamName);
+			round.get(initalRounds).set(1,teamName);
 		}
 	}
 
