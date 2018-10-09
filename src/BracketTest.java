@@ -8,15 +8,15 @@ class BracketTest {
 
 	public static void main(String[] args) {
 
-		ArrayList<Team> teams = new ArrayList<Team>();
-		DoubleGenerator generator;
-		SingleGenerator singleGenerator;
-
-		int numTeamsMade = 7;
-
-		for (int i = 0; i < numTeamsMade; i++) {
-			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
-		}
+//		ArrayList<Team> teams = new ArrayList<Team>();
+//		DoubleGenerator generator;
+//		SingleGenerator singleGenerator;
+//
+//		int numTeamsMade = 7;
+//
+//		for (int i = 0; i < numTeamsMade; i++) {
+//			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
+//		}
 
 		// generate without seeds
 
@@ -24,17 +24,17 @@ class BracketTest {
 		// generate with seeds
 		
 		boolean seed = true; 
-		generator = new DoubleGenerator(teams, seed);
+		//generator = new DoubleGenerator(teams, seed);
 
-		 singleGenerator = new SingleGenerator(teams, false);
+		 //singleGenerator = new SingleGenerator(teams, false);
 
-		DoubleBracket bracket = (DoubleBracket) generator.getBracket();
+		//DoubleBracket bracket = (DoubleBracket) generator.getBracket();
 		
-		SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
+		//SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
 
 		ManagementSystem managementSystem = new ManagementSystem();		
 
-		Display disp = new Display(bracket);
+		//Display disp = new Display(bracket);
 
 		
 //		bracket.setMatchWinner("E", 1, 1);
