@@ -174,11 +174,7 @@ public class DoubleBracket extends Bracket {
 	 */
 	@Override
 	String[][] getTeamsInMatch(int roundNum, int matchNumber) {
-
-		String[][] teamsInMatch = new String[2][];
-
-		ArrayList<String> possibleTop = new ArrayList<String>();
-		ArrayList<String> possibleBottom = new ArrayList<String>();
+		
 
 		int roundSize = round.get(roundNum - 1).size();
 
@@ -192,6 +188,17 @@ public class DoubleBracket extends Bracket {
 		} else {
 			inWinnersBracket = false;
 		}
+		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
+		System.out.println(matchNumber);
+
+
+		String[][] teamsInMatch = new String[2][];
+
+		ArrayList<String> possibleTop = new ArrayList<String>();
+		ArrayList<String> possibleBottom = new ArrayList<String>();
+
+
+
 
 		boolean alreadyFull1 = false;
 		boolean alreadyFull2 = false;
@@ -199,27 +206,33 @@ public class DoubleBracket extends Bracket {
 		
 		if (inWinnersBracket) {
 
-			if (round.get(roundNum - 1).get((matchNumber * 2) - 2) != null
+			if (round.get(roundNum - 1).get((matchNumber * 2) - 2) != "?"
 					&& !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()) {
 
 				alreadyFull1 = true;
 				String top = round.get(roundNum - 1).get((matchNumber * 2) - 2);
 				teamsInMatch[0] = new String[] { top };
 
+
 			}
 
 			try {
 
-				if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != null
+				if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != "?"
 						&& !round.get(roundNum - 1).get((matchNumber * 2) - 1).isEmpty()) {
 					alreadyFull2 = true;
 					String bottom = round.get(roundNum - 1).get((matchNumber * 2) - 1);
 					teamsInMatch[1] = new String[] { bottom };
+					
+
 				}
 
 			} catch (IndexOutOfBoundsException e) {
 
 			}
+			
+
+
 
 			if (alreadyFull1 && alreadyFull2) {
 				return teamsInMatch;
@@ -243,7 +256,7 @@ public class DoubleBracket extends Bracket {
 			}
 
 			if (((newMatchNumber * 2) - 1) >= loserRound.get(roundNum - 1).size()) {
-				teamsInMatch[1] = new String[] { "" };
+				//teamsInMatch[1] = new String[] { "" };
 			} else if (loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 1) != null
 					&& !loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 1).isEmpty()) {
 				alreadyFull2 = true;
@@ -256,6 +269,8 @@ public class DoubleBracket extends Bracket {
 			}
 
 		}
+		
+
 
 		if (roundNum > 1 && inWinnersBracket && !alreadyFull1 && !alreadyFull2) {
 
@@ -270,7 +285,7 @@ public class DoubleBracket extends Bracket {
 			for (int i = 0; i < possibleBottom.size(); i++) {
 				possibleBottom.remove("BYE");
 			}
-
+			
 			teamsInMatch[0] = new String[possibleBottom.size()];
 			teamsInMatch[1] = new String[possibleTop.size()];
 
@@ -392,8 +407,12 @@ public class DoubleBracket extends Bracket {
 			}
 
 			if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
+				System.out.println(roundNum);
 
 				possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 1));
+				
+				
+				
 				if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
 					possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 2));
 				}
