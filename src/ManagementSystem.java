@@ -422,7 +422,7 @@ public class ManagementSystem {
                         Team newTeam = new Team(teams[i]);
                         teamList.add(newTeam);
 
-                        DoubleGenerator doubleGen = new DoubleGenerator(teamList);
+                        DoubleGenerator doubleGen = new DoubleGenerator(teamList, false);
                         bracket= doubleGen.getBracket();
                         bracketDisplay = new Display(bracket);
                     }
