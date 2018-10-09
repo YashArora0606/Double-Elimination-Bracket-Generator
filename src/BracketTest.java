@@ -10,7 +10,7 @@ class BracketTest {
 
 		ArrayList<Team> teams = new ArrayList<Team>();
 		DoubleGenerator generator;
-		// SingleGenerator singleGenerator;
+		SingleGenerator singleGenerator;
 
 		int numTeamsMade = 7;
 
@@ -26,20 +26,15 @@ class BracketTest {
 		boolean seed = true; 
 		generator = new DoubleGenerator(teams, seed);
 
-		/*
-		for (int i = 0; i < teams.size(); i++) {
-			System.out.println(teams.get(i).getName() + " " +teams.get(i).getSeed());
-		}
-		
-		*/
-		// singleGenerator = new SingleGenerator(teams, false);
+		 singleGenerator = new SingleGenerator(teams, false);
 
 		DoubleBracket bracket = (DoubleBracket) generator.getBracket();
-		// SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
+		
+		SingleBracket singleBracket = (SingleBracket)singleGenerator.getBracket();
 
-		// ManagementSystem managementSystem = new ManagementSystem();
+		ManagementSystem managementSystem = new ManagementSystem();
 
-		// Display disp = new Display(bracket);
+		Display disp = new Display(bracket);
 
 		
 		bracket.setMatchWinner("E", 1, 1);
