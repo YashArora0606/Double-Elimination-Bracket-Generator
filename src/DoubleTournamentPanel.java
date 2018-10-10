@@ -249,12 +249,14 @@ public class DoubleTournamentPanel extends TournamentPanel {
             }
 
             if (teams[0].length == 1) { //checking if the team playing is already determined
-               /*
+               
+            	/*
             	if (((DoubleBracket)tournament).getWinnerOfMatch(roundNum, i+1) == teams[0][0]){ //if they're the winner, will bold the winner team's name
                     fontMetrics = g.getFontMetrics(font1);
                     g.setFont(boldFont);
                 }
                 */
+                
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
                 g.setFont(font1); //resets the font
                 fontMetrics = g.getFontMetrics(font1);
@@ -338,7 +340,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
             }
         }
 
-        //drawLineBetweenMatch(boxes.get(tournament.getNumberOfRounds()-3)[1], boxes.get(tournament.getNumberOfRounds()-2)[0], g); //connects the last loser bracket match to the winner bracket (since winner of loser bracket plays the winner of the winner bracket)
+        drawLineBetweenMatch(boxes.get(tournament.getNumberOfRounds()-3)[1], boxes.get(tournament.getNumberOfRounds()-2)[0], g); //connects the last loser bracket match to the winner bracket (since winner of loser bracket plays the winner of the winner bracket)
     }
 
     /**

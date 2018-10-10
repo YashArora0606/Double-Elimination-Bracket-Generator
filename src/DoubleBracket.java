@@ -7,6 +7,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DoubleBracket extends Bracket {
 
@@ -24,6 +25,7 @@ public class DoubleBracket extends Bracket {
 	static boolean seed = false;
 	String tournamentWinner = null;
 	boolean inWinnersBracket;
+	static int numByesSeed = 0;
 
 	// ArrayList<Team>[] round;
 	ArrayList<ArrayList<String>> round;
@@ -76,7 +78,7 @@ public class DoubleBracket extends Bracket {
 		for (int i = 0; i < teams.size(); i++) {
 			round.get(0).add(i, teams.get(i).getName());
 		}
-
+		
 		// calculate number of BYES that is needed
 		int numByes = nextPowerOftwo(teams.size()) - teams.size();
 
@@ -84,6 +86,15 @@ public class DoubleBracket extends Bracket {
 		for (int i = 1; i <= numByes; i++) {
 			round.get(0).add((i * 2) - 1, "BYE");
 		}
+		
+		// Add these byes as teams into the first round
+		for (int i = 1; i <= numByes; i++) {
+			
+			teams.add(new Team("BYE",Integer.MAX_VALUE));
+		}
+					
+
+		
 
 		for (int i = 1; i <= numRounds; i++) {
 			for (int j = 0; j < calcNumberOfTeamsLosers(i); j++) {
@@ -115,6 +126,8 @@ public class DoubleBracket extends Bracket {
 				}
 			}
 		}
+	
+	
 
 	}
 
@@ -125,7 +138,8 @@ public class DoubleBracket extends Bracket {
 	 */
 	@Override
 	int getNumberOfTeams() {
-		return numTeams;
+		
+		return numTeams - numByesSeed  ;
 	}
 
 	/**
@@ -190,7 +204,7 @@ public class DoubleBracket extends Bracket {
 			inWinnersBracket = false;
 		}
 		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
-		System.out.println(matchNumber);
+		
 
 		String[][] teamsInMatch = new String[2][];
 
@@ -406,7 +420,6 @@ public class DoubleBracket extends Bracket {
 			}
 
 			if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
-				System.out.println(roundNum);
 
 				possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 1));
 				

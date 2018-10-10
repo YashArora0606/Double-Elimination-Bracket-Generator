@@ -19,6 +19,7 @@ public class DoubleGenerator extends Generator {
 			
 			// add BYES as teams and assign a value of Seed
 			int numByes = DoubleBracket.nextPowerOftwo(teams.size()) - teams.size();
+			DoubleBracket.numByesSeed = numByes;
 			for (int i = 0; i < numByes; i++) {
 				teams.add(new Team("BYE", Integer.MAX_VALUE - i));
 			}
