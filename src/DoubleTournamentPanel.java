@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.FontMetrics;
+import java.awt.GradientPaint;
 import java.awt.BasicStroke;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -61,6 +62,11 @@ public class DoubleTournamentPanel extends TournamentPanel {
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        Graphics g2 = (Graphics2D)g;
+        GradientPaint bg = new GradientPaint(0,0, new Color(237,184,230), 0, maxY, new Color(199,164,220));
+        	((Graphics2D) g2).setPaint(bg);
+        	g2.setColor(Color.DARK_GRAY);
+        g2.fillRect(-200, 0, maxX, maxY+200);
 
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches; //number of matches in a round
@@ -149,10 +155,10 @@ public class DoubleTournamentPanel extends TournamentPanel {
         g.drawString("Winner of Tournament", x1 + (x2-x1)/2 - fontMetrics.stringWidth("Winner of Tournament")/2, winningHeight/2 + 20);
 
 
-        Graphics2D g2 = (Graphics2D) g;
-        drawRotate(g2, 30, winningHeight/2 + fontMetrics.stringWidth("Winner  Bracket")/2, -90, "Winner  Bracket"); //displaying the winner and loser bracket labels
-        drawRotate(g2, 30, winningHeight + losingHeight/2 + fontMetrics.stringWidth("Loser  Bracket")/2, -90, "Loser  Bracket");
-        g2.dispose();
+        Graphics2D g21 = (Graphics2D) g;
+        drawRotate(g21, 30, winningHeight/2 + fontMetrics.stringWidth("Winner  Bracket")/2, -90, "Winner  Bracket"); //displaying the winner and loser bracket labels
+        drawRotate(g21, 30, winningHeight + losingHeight/2 + fontMetrics.stringWidth("Loser  Bracket")/2, -90, "Loser  Bracket");
+        g21.dispose();
     }
 
     /**
@@ -217,7 +223,9 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
             g.setColor(new Color(255, 255, 255));
             g.fillRoundRect(workingX, workingY, boxLength, boxHeight, 20,20); //draws the solid rounded rectangle
-            g.setColor(colors.getColors().get(colorIndex)); //sets the colour
+            //g.setColor(colors.getColors().get(colorIndex)); //sets the colour
+            g.setColor(new Color(199,164,220)); //sets the colour
+
             colorIndex++;
 
             //drawing the rectangles

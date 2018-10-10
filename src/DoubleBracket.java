@@ -25,7 +25,9 @@ public class DoubleBracket extends Bracket {
 	String tournamentWinner = null;
 	boolean inWinnersBracket;
 	static int numByesSeed = 0;
-
+	String[] finalMatch = new String[2];
+	
+	
 	// ArrayList<Team>[] round;
 	ArrayList<ArrayList<String>> round;
 	ArrayList<ArrayList<String>> loserRound;
@@ -67,11 +69,11 @@ public class DoubleBracket extends Bracket {
 		for (int i = 1; i <= initalRounds; i++) {
 
 			for (int j = 0; j < previousSize; j++) {
-				round.get(i).add("?");
+				round.get(i).add("unknown");
 			}
 			previousSize = previousSize / 2;
 		}
-		round.get(initalRounds).add("?");
+		round.get(initalRounds).add("unknown");
 
 		// add teams in to the first round
 		for (int i = 0; i < teams.size(); i++) {
@@ -88,7 +90,7 @@ public class DoubleBracket extends Bracket {
 
 		for (int i = 1; i <= numRounds; i++) {
 			for (int j = 0; j < calcNumberOfTeamsLosers(i); j++) {
-				loserRound.get(i - 1).add("?");
+				loserRound.get(i - 1).add("unknown");
 			}
 
 		}
@@ -137,7 +139,7 @@ public class DoubleBracket extends Bracket {
 	@Override
 	int getNumberOfRounds() {
 		// minus 1 because the final round is double counted
-		return numRounds - 1;
+		return numRounds-2;
 	}
 
 	/**
@@ -176,9 +178,9 @@ public class DoubleBracket extends Bracket {
 	 */
 	@Override
 	String[][] getTeamsInMatch(int roundNum, int matchNumber) {
-		
-		System.out.println("RoundNumber: " + roundNum);
-		System.out.println("MatchNumber: " + matchNumber);
+
+		//System.out.println("RoundNumber: " + roundNum);
+		//System.out.println("MatchNumber: " + matchNumber);
 
 		int roundSize = round.get(roundNum - 1).size();
 
@@ -186,15 +188,29 @@ public class DoubleBracket extends Bracket {
 			roundSize++;
 		}
 
-		boolean inWinnersBracket;
-		if (matchNumber * 2 <= roundSize) {
+		// System.out.println(roundSize);
+
+		// boolean inWinnersBracket;
+		// if (matchNumber * 2 <= roundSize) {
+		// inWinnersBracket = true;
+		// } else {
+		// inWinnersBracket = false;
+		// }
+
+		if (getMatchBracket(roundNum, matchNumber) == 0) {
 			inWinnersBracket = true;
 		} else {
 			inWinnersBracket = false;
 		}
-		
+
 		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
-		// System.out.println(matchNumber);
+		
+		
+
+		
+
+		// System.out.println(inWinnersBracket);
+		//System.out.println(inWinnersBracket);
 
 		String[][] teamsInMatch = new String[2][];
 
@@ -203,14 +219,59 @@ public class DoubleBracket extends Bracket {
 
 		boolean alreadyFull1 = false;
 		boolean alreadyFull2 = false;
-		
-		
-		
+
 		// If the match is part of the winner's bracket
 		if (inWinnersBracket) {
 			
-
 			
+			// If final round
+			if (roundNum-1 == initalRounds) {
+				
+				// If not yet decided winner of loser round
+				if (loserRound.get(initalRounds + 1).get(0).equals("unknown")) {
+					//System.out.println("CASE 1");
+
+					String top = round.get(roundNum-1).get((matchNumber * 2) - 2);
+					String bottom1 = loserRound.get(roundNum-1).get(0);
+					String bottom2 = loserRound.get(roundNum-1).get(1);
+					
+
+					teamsInMatch[0] = new String[] { top };
+					teamsInMatch[1] = new String[] { bottom1, bottom2 };
+					
+					return teamsInMatch;			
+					
+					// If winner of the loser round has been decided
+				} else {
+					
+					//System.out.println("CASE 2");
+										
+					String top = round.get(roundNum-1).get((matchNumber * 2) - 2);
+					
+					round.get(roundNum-1).set(1, loserRound.get(roundNum).get(0));
+					String bottom = round.get(roundNum-1).get(1);
+					
+					finalMatch[0] = round.get(roundNum-1).get((matchNumber * 2) - 2);
+					finalMatch[1] = loserRound.get(roundNum).get(0);
+					
+					
+					
+					
+					//System.out.println("THIS: " + round.get(roundNum-1).get(1));
+
+
+
+					teamsInMatch[0] = new String[] { finalMatch[0] };
+					teamsInMatch[1] = new String[] { finalMatch[1] };
+					
+					return teamsInMatch;
+					
+				}
+			}
+			
+			
+			
+
 			// If it is round 1 of the winners bracket
 			if (roundNum == 1) {
 				String top = round.get(0).get((matchNumber * 2) - 2);
@@ -218,66 +279,86 @@ public class DoubleBracket extends Bracket {
 
 				teamsInMatch[0] = new String[] { top };
 				teamsInMatch[1] = new String[] { bottom };
-				
-				
+
 				// If it is any other round in the winner's bracket
 			} else if (roundNum > 1) {
-				
-				 if (((matchNumber * 2) - 2) < round.get(roundNum - 1).size()
-				 && !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()
-				 && round.get(roundNum - 1).get((matchNumber * 2) - 2) != "?") {
-				
-				 alreadyFull1 = true;
-				 String top = round.get(roundNum - 1).get((matchNumber * 2) - 2);
-				 teamsInMatch[0] = new String[] { top };
-				
-				
-				 }
-				
-				 try {
-				
-				 if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != "?"
-				 && !round.get(roundNum - 1).get((matchNumber * 2) - 1).isEmpty()) {
-				 alreadyFull2 = true;
-				 String bottom = round.get(roundNum - 1).get((matchNumber * 2) - 1);
-				 teamsInMatch[1] = new String[] { bottom };
-				
-				
-				 }
-				
-				 } catch (IndexOutOfBoundsException e) {
-				
-				 }
-				
-				
-				
-				
-				 if (alreadyFull1 && alreadyFull2) {
-				 return teamsInMatch;
-				 }
-				
-				
-				
-				
-				
-				
-				
-				possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
-				
-				int tempCounter = 0;
-				while (possibleTop.size() == 0) {
-					tempCounter++;
-					possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2-tempCounter, inWinnersBracket));
+
+				if (((matchNumber * 2) - 2) < round.get(roundNum - 1).size()
+						&& !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()
+						&& round.get(roundNum - 1).get((matchNumber * 2) - 2) != "unknown") {
+
+					alreadyFull1 = true;
+					String top = round.get(roundNum - 1).get((matchNumber * 2) - 2);
+					teamsInMatch[0] = new String[] { top };
 
 				}
 
-				
-				//System.out.println(possibleTop.get(0));
+				try {
 
-				
-				
+					if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != "unknown"
+							&& !round.get(roundNum - 1).get((matchNumber * 2) - 1).isEmpty()) {
+						alreadyFull2 = true;
+						String bottom = round.get(roundNum - 1).get((matchNumber * 2) - 1);
+						teamsInMatch[1] = new String[] { bottom };
+
+					}
+
+				} catch (IndexOutOfBoundsException e) {
+
+				}
+
+				//System.out.println("full1" + alreadyFull1);
+				//System.out.println("full2" + alreadyFull2);
+
+				if (alreadyFull1 && alreadyFull2) {
+					return teamsInMatch;
+				}
+
+				// If only top side is full
+				if (alreadyFull1 && !alreadyFull2) {
+					
+					
+					possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
+					int tempCounter = 0;
+					while (possibleTop.size() == 0) {
+						tempCounter++;
+						possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2 - tempCounter, inWinnersBracket));
+					}
+					for (int i = 0; i < possibleTop.size(); i++) {
+						possibleTop.remove("BYE");
+					}
+					teamsInMatch[1] = new String[possibleTop.size()];
+					for (int i = 0; i < teamsInMatch[1].length; i++) {
+						teamsInMatch[1][i] = possibleTop.get(i);
+					}
+					
+					return teamsInMatch;
+
+
+					// If only bot side is full
+				} else if (alreadyFull2 && !alreadyFull1) {
+					possibleBottom.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1, inWinnersBracket));
+					for (int i = 0; i < possibleBottom.size(); i++) {
+						possibleBottom.remove("BYE");
+					}
+					teamsInMatch[0] = new String[possibleBottom.size()];
+					for (int i = 0; i < teamsInMatch[0].length; i++) {
+						teamsInMatch[0][i] = possibleBottom.get(i);
+					}
+					
+					return teamsInMatch;
+				}
+
+				possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
+
+				int tempCounter = 0;
+				while (possibleTop.size() == 0) {
+					tempCounter++;
+					possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2 - tempCounter, inWinnersBracket));
+
+				}
+
 				possibleBottom.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1, inWinnersBracket));
-
 
 				for (int i = 0; i < possibleTop.size(); i++) {
 					possibleTop.remove("BYE");
@@ -298,71 +379,65 @@ public class DoubleBracket extends Bracket {
 				}
 			}
 			
+			return teamsInMatch;
+
 			// If it is in the loser's bracket
 		} else if (!inWinnersBracket) {
-			
-			
-			
+
 			// Need to calculate the new match number to work with
-			 roundSize = round.get(roundNum - 1).size();
-			 int newTeamNumber = (matchNumber * 2) - (roundSize + 1);
-			 int newMatchNumber = (newTeamNumber + 1) / 2;
-				System.out.println(newMatchNumber);
+			roundSize = round.get(roundNum - 1).size();
+			int newTeamNumber = (matchNumber * 2) - (roundSize + 1);
+			int newMatchNumber = (newTeamNumber + 1) / 2;
+			//System.out.println(newMatchNumber);
 
-				// If it is round 1 of the loser's bracket
-				if (roundNum == 1) {
-					String top = loserRound.get(0).get((newMatchNumber * 2) - 2);
-					String bottom = loserRound.get(0).get((newMatchNumber * 2) - 1);
+			// If it is round 1 of the loser's bracket
+			if (roundNum == 1) {
+				String top = loserRound.get(0).get((newMatchNumber * 2) - 2);
+				String bottom = loserRound.get(0).get((newMatchNumber * 2) - 1);
 
-					teamsInMatch[0] = new String[] { top };
-					teamsInMatch[1] = new String[] { bottom };
-					
-					
-					// If it is any other round in the loser's bracket
-				} else if (roundNum > 1) {
-					
-					
-					
-					
-					
-					
-					
-					String top = loserRound.get(roundNum-1).get((newMatchNumber * 2) - 2);
-					String bottom = loserRound.get(roundNum-1).get((newMatchNumber * 2) - 1);
+				teamsInMatch[0] = new String[] { top };
+				teamsInMatch[1] = new String[] { bottom };
 
-					teamsInMatch[0] = new String[] { top };
-					teamsInMatch[1] = new String[] { bottom };
-					
-//					possibleTop.addAll(findPossTop(roundNum - 1, newMatchNumber * 2, inWinnersBracket));
-//					possibleBottom.addAll(findPossTop(roundNum - 1, (newMatchNumber * 2) - 1, inWinnersBracket));
-//
-//					for (int i = 0; i < possibleTop.size(); i++) {
-//						possibleTop.remove("BYE");
-//					}
-//
-//					for (int i = 0; i < possibleBottom.size(); i++) {
-//						possibleBottom.remove("BYE");
-//					}
-//
-//					teamsInMatch[0] = new String[possibleBottom.size()];
-//					teamsInMatch[1] = new String[possibleTop.size()];
-//
-//					for (int i = 0; i < teamsInMatch[1].length; i++) {
-//						teamsInMatch[1][i] = possibleTop.get(i);
-//					}
-//					for (int i = 0; i < teamsInMatch[0].length; i++) {
-//						teamsInMatch[0][i] = possibleBottom.get(i);
-//					}
-				}
-			
-			
+				// If it is any other round in the loser's bracket
+			} else if (roundNum > 1) {
+
+				String top = loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2);
+				String bottom = loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 1);
+
+				teamsInMatch[0] = new String[] { top };
+				teamsInMatch[1] = new String[] { bottom };
+
+				// possibleTop.addAll(findPossTop(roundNum - 1, newMatchNumber * 2,
+				// inWinnersBracket));
+				// possibleBottom.addAll(findPossTop(roundNum - 1, (newMatchNumber * 2) - 1,
+				// inWinnersBracket));
+				//
+				// for (int i = 0; i < possibleTop.size(); i++) {
+				// possibleTop.remove("BYE");
+				// }
+				//
+				// for (int i = 0; i < possibleBottom.size(); i++) {
+				// possibleBottom.remove("BYE");
+				// }
+				//
+				// teamsInMatch[0] = new String[possibleBottom.size()];
+				// teamsInMatch[1] = new String[possibleTop.size()];
+				//
+				// for (int i = 0; i < teamsInMatch[1].length; i++) {
+				// teamsInMatch[1][i] = possibleTop.get(i);
+				// }
+				// for (int i = 0; i < teamsInMatch[0].length; i++) {
+				// teamsInMatch[0][i] = possibleBottom.get(i);
+				// }
+			}
+
 		}
 
 		// if (inWinnersBracket) {
 		//
 		// if (((matchNumber * 2) - 2) < round.get(roundNum - 1).size()
 		// && !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()
-		// && round.get(roundNum - 1).get((matchNumber * 2) - 2) != "?") {
+		// && round.get(roundNum - 1).get((matchNumber * 2) - 2) != "unknown") {
 		//
 		// alreadyFull1 = true;
 		// String top = round.get(roundNum - 1).get((matchNumber * 2) - 2);
@@ -373,7 +448,7 @@ public class DoubleBracket extends Bracket {
 		//
 		// try {
 		//
-		// if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != "?"
+		// if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != "unknown"
 		// && !round.get(roundNum - 1).get((matchNumber * 2) - 1).isEmpty()) {
 		// alreadyFull2 = true;
 		// String bottom = round.get(roundNum - 1).get((matchNumber * 2) - 1);
@@ -515,84 +590,79 @@ public class DoubleBracket extends Bracket {
 		ArrayList<String> possibleTop = new ArrayList<String>();
 
 		int roundSize = round.get(roundNum - 1).size();
-//		System.out.println(round.get(roundNum-1).get((matchNumber*2)-1));
-//		System.out.println(roundNum);
-//		System.out.println(matchNumber);
+		// System.out.println(round.get(roundNum-1).get((matchNumber*2)-1));
+		// System.out.println(roundNum);
+		// System.out.println(matchNumber);
 
-
-		
 		// If in the winner's bracket
 		if (inWinnersBracket) {
-			
+
 			// If the round number is 1 or the teams in that match have already been decided
-//			if (roundNum == 1 || round.get(roundNum-1).get((matchNumber*2)-1) != "?") {
-//				possibleTop.add(round.get(roundNum-1).get((matchNumber*2)-1));
-//			}
-			
-			
+			// if (roundNum == 1 || round.get(roundNum-1).get((matchNumber*2)-1) != "unknown") {
+			// possibleTop.add(round.get(roundNum-1).get((matchNumber*2)-1));
+			// }
+
 			if (roundNum == 0) {
 				return possibleTop;
 			}
-			
-//			if (roundNum == 1) {
-//				//System.out.println("YESYES");
-//				//possibleTop.add(round.get(0).get((matchNumber * 2) - 2));
-//				return possibleTop;
-//			}
-	
+
+			// if (roundNum == 1) {
+			// //System.out.println("YESYES");
+			// //possibleTop.add(round.get(0).get((matchNumber * 2) - 2));
+			// return possibleTop;
+			// }
+
 			if (matchNumber > round.get(roundNum).size()) {
 				return possibleTop;
 			}
-	
-			if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
-//				System.out.println("R" + roundNum);
-//				System.out.println("M" + matchNumber);
-//
-//
-//				System.out.println(round.get(roundNum - 1).get((matchNumber * 2) - 1));
-//				System.out.println(round.get(roundNum - 1).get((matchNumber * 2) - 2));
-//
-//				System.out.println();
 
-	
+			if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
+				// System.out.println("R" + roundNum);
+				// System.out.println("M" + matchNumber);
+				//
+				//
+				// System.out.println(round.get(roundNum - 1).get((matchNumber * 2) - 1));
+				// System.out.println(round.get(roundNum - 1).get((matchNumber * 2) - 2));
+				//
+				// System.out.println();
+
 				possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 1));
-	
+
 				if ((matchNumber * 2) - 1 < round.get(roundNum - 1).size()) {
 					possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 2));
-					
-				}
-				if (round.get(roundNum - 1).get((matchNumber * 2) - 1) == "?") {
-					possibleTop.addAll(findPossTop(roundNum-1, (matchNumber * 2) - 1 , inWinnersBracket));
-					possibleTop.addAll(findPossTop(roundNum-1, (matchNumber * 2) , inWinnersBracket));
 
 				}
-				
+				if (round.get(roundNum - 1).get((matchNumber * 2) - 1) == "unknown") {
+					possibleTop.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1, inWinnersBracket));
+					possibleTop.addAll(findPossTop(roundNum - 1, (matchNumber * 2), inWinnersBracket));
+
+				}
+
 				for (int j = 0; j < possibleTop.size(); j++) {
 					for (int i = 0; i < possibleTop.size(); i++) {
-						if (possibleTop.get(i).equals("?")) {
+						if (possibleTop.get(i).equals("unknown")) {
 							possibleTop.remove(i);
 						}
 					}
 				}
-				
-				
+
 				return possibleTop;
-	
+
 			} else {
-	
+
 				ArrayList<String> combinedArray = new ArrayList<String>();
 				combinedArray.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
 				combinedArray.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1, inWinnersBracket));
-				
+
 				for (int i = 0; i < combinedArray.size(); i++) {
-					if (combinedArray.get(i).equals("?")) {
+					if (combinedArray.get(i).equals("unknown")) {
 						combinedArray.remove(i);
 					}
 				}
-	
+
 				return combinedArray;
 			}
-			
+
 		} else if (!inWinnersBracket) {
 			int newTeamNumber = (matchNumber * 2) - (roundSize + 1);
 			int newMatchNumber = (newTeamNumber + 1) / 2;
@@ -606,10 +676,10 @@ public class DoubleBracket extends Bracket {
 			}
 
 			if ((newMatchNumber * 2) - 2 < loserRound.get(roundNum - 1).size()) {
-				
-				System.out.println(roundNum);
-				System.out.println(newMatchNumber);
-				
+
+				// System.out.println(roundNum);
+				// System.out.println(newMatchNumber);
+
 				possibleTop.add(loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 1));
 				if ((newMatchNumber * 2) - 2 < loserRound.get(roundNum - 1).size()) {
 					possibleTop.add(loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2));
@@ -628,65 +698,69 @@ public class DoubleBracket extends Bracket {
 		}
 		return null;
 
-//		if (!inWinnersBracket) {
-//			int newTeamNumber = (matchNumber * 2) - (roundSize + 1);
-//			int newMatchNumber = (newTeamNumber + 1) / 2;
-//
-//			if (roundNum == 0) {
-//				return possibleTop;
-//			}
-//
-//			if (newMatchNumber > loserRound.get(roundNum).size()) {
-//				return possibleTop;
-//			}
-//
-//			if ((newMatchNumber * 2) - 2 < loserRound.get(roundNum - 1).size()) {
-//
-//				possibleTop.add(loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 1));
-//				if ((newMatchNumber * 2) - 2 < loserRound.get(roundNum - 1).size()) {
-//					possibleTop.add(loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2));
-//				}
-//
-//				return possibleTop;
-//
-//			} else {
-//
-//				ArrayList<String> combinedArray = new ArrayList<String>();
-//				combinedArray.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
-//				combinedArray.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1, inWinnersBracket));
-//
-//				return combinedArray;
-//			}
-//
-//		} else {
-//			if (roundNum == 0) {
-//				return possibleTop;
-//			}
-//
-//			if (matchNumber > round.get(roundNum).size()) {
-//				return possibleTop;
-//			}
-//
-//			if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
-//				//System.out.println(roundNum);
-//
-//				possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 1));
-//
-//				if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
-//					possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 2));
-//				}
-//
-//				return possibleTop;
-//
-//			} else {
-//
-//				ArrayList<String> combinedArray = new ArrayList<String>();
-//				combinedArray.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
-//				combinedArray.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1, inWinnersBracket));
-//
-//				return combinedArray;
-//			}
-//		}
+		// if (!inWinnersBracket) {
+		// int newTeamNumber = (matchNumber * 2) - (roundSize + 1);
+		// int newMatchNumber = (newTeamNumber + 1) / 2;
+		//
+		// if (roundNum == 0) {
+		// return possibleTop;
+		// }
+		//
+		// if (newMatchNumber > loserRound.get(roundNum).size()) {
+		// return possibleTop;
+		// }
+		//
+		// if ((newMatchNumber * 2) - 2 < loserRound.get(roundNum - 1).size()) {
+		//
+		// possibleTop.add(loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 1));
+		// if ((newMatchNumber * 2) - 2 < loserRound.get(roundNum - 1).size()) {
+		// possibleTop.add(loserRound.get(roundNum - 1).get((newMatchNumber * 2) - 2));
+		// }
+		//
+		// return possibleTop;
+		//
+		// } else {
+		//
+		// ArrayList<String> combinedArray = new ArrayList<String>();
+		// combinedArray.addAll(findPossTop(roundNum - 1, matchNumber * 2,
+		// inWinnersBracket));
+		// combinedArray.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1,
+		// inWinnersBracket));
+		//
+		// return combinedArray;
+		// }
+		//
+		// } else {
+		// if (roundNum == 0) {
+		// return possibleTop;
+		// }
+		//
+		// if (matchNumber > round.get(roundNum).size()) {
+		// return possibleTop;
+		// }
+		//
+		// if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
+		// //System.out.println(roundNum);
+		//
+		// possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 1));
+		//
+		// if ((matchNumber * 2) - 2 < round.get(roundNum - 1).size()) {
+		// possibleTop.add(round.get(roundNum - 1).get((matchNumber * 2) - 2));
+		// }
+		//
+		// return possibleTop;
+		//
+		// } else {
+		//
+		// ArrayList<String> combinedArray = new ArrayList<String>();
+		// combinedArray.addAll(findPossTop(roundNum - 1, matchNumber * 2,
+		// inWinnersBracket));
+		// combinedArray.addAll(findPossTop(roundNum - 1, (matchNumber * 2) - 1,
+		// inWinnersBracket));
+		//
+		// return combinedArray;
+		// }
+		// }
 
 	}
 
@@ -703,6 +777,10 @@ public class DoubleBracket extends Bracket {
 	 */
 	@Override
 	void setMatchWinner(String teamName, int roundNum, int matchNumber) {
+		
+		if (roundNum-1 == initalRounds && matchNumber == 1) {
+			tournamentWinner = teamName;
+		} else {
 
 		int roundSize = round.get(roundNum - 1).size();
 
@@ -717,6 +795,8 @@ public class DoubleBracket extends Bracket {
 
 		// to change the value of roundNum to the index of the round
 		roundNum = roundNum - 1;
+		
+		//System.out.println("finals: "+ finals);
 
 		if (!finals) {
 
@@ -770,7 +850,7 @@ public class DoubleBracket extends Bracket {
 				for (int i = 1; i <= (calcNumberOfTeamsLosers(roundNum + 1)) / 2; i++) {
 					int matchNumberNew = i + (roundSize / 2);
 					if ((loserRound.get(roundNum).get(i * 2 - 2)).equals("BYE")
-							&& !loserRound.get(roundNum).get(i * 2 - 1).equals("?")) {
+							&& !loserRound.get(roundNum).get(i * 2 - 1).equals("unknown")) {
 						if (roundNum % 2 == 0) {
 							int index = ((matchNumberNew * 2) - roundSize) - 2;
 							loserRound.get(roundNum + 1).set(index, loserRound.get(roundNum).get(i * 2 - 1));
@@ -783,6 +863,8 @@ public class DoubleBracket extends Bracket {
 			}
 
 		} else if (finals) {
+			
+			//System.out.println("WE ARE ON FINALS");
 
 			// Doing finals
 
@@ -809,9 +891,11 @@ public class DoubleBracket extends Bracket {
 		}
 
 		// check if finals conditions has been reached
-		if (round.get(initalRounds).size() == 1 && !loserRound.get(numRounds - 3).get(0).equals("?")) {
+		if (round.get(initalRounds).size() == 1 && !loserRound.get(numRounds - 3).get(0).equals("unknown")) {
 			finals = true;
 			round.get(initalRounds).set(1, teamName);
+		}
+		
 		}
 	}
 
@@ -829,31 +913,24 @@ public class DoubleBracket extends Bracket {
 	@Override
 	int getMatchBracket(int roundNum, int matchNumber) {
 
-//		// calculate match number including BYES
-//		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
-//
-//		if (matchNumber * 2 <= round.get(roundNum - 1).size()) {
-//			return 0; // if winners bracket then 0
-//		} else if (matchNumber * 2 <= (round.get(roundNum - 1).size() + loserRound.get(roundNum - 1).size())) {
-//			return 1; // if losers bracket then 1
-//		}
-		
 		int roundSize = round.get(roundNum - 1).size();
-		
-		boolean inWinnersBracket;
-		if (matchNumber * 2 <= roundSize) {
-			inWinnersBracket = true;
+
+		int numByes = nextPowerOftwo(teams.size()) - teams.size();
+
+		if (roundNum == 1) {
+			if (matchNumber + numByes <= roundSize / 2) {
+				return 0;
+			} else {
+				return 1;
+			}
 		} else {
-			inWinnersBracket = false;
-		}
-		
-		if (inWinnersBracket) {
-			return 0;
-		} else if (!inWinnersBracket) {
-			return 1;
+			if (matchNumber <= roundSize / 2) {
+				return 0;
+			} else {
+				return 1;
+			}
 		}
 
-		return -1;
 	}
 
 	/**
