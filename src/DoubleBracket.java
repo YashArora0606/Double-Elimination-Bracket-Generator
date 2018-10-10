@@ -223,6 +223,45 @@ public class DoubleBracket extends Bracket {
 				// If it is any other round in the winner's bracket
 			} else if (roundNum > 1) {
 				
+				 if (((matchNumber * 2) - 2) < round.get(roundNum - 1).size()
+				 && !round.get(roundNum - 1).get((matchNumber * 2) - 2).isEmpty()
+				 && round.get(roundNum - 1).get((matchNumber * 2) - 2) != "?") {
+				
+				 alreadyFull1 = true;
+				 String top = round.get(roundNum - 1).get((matchNumber * 2) - 2);
+				 teamsInMatch[0] = new String[] { top };
+				
+				
+				 }
+				
+				 try {
+				
+				 if (round.get(roundNum - 1).get((matchNumber * 2) - 1) != "?"
+				 && !round.get(roundNum - 1).get((matchNumber * 2) - 1).isEmpty()) {
+				 alreadyFull2 = true;
+				 String bottom = round.get(roundNum - 1).get((matchNumber * 2) - 1);
+				 teamsInMatch[1] = new String[] { bottom };
+				
+				
+				 }
+				
+				 } catch (IndexOutOfBoundsException e) {
+				
+				 }
+				
+				
+				
+				
+				 if (alreadyFull1 && alreadyFull2) {
+				 return teamsInMatch;
+				 }
+				
+				
+				
+				
+				
+				
+				
 				possibleTop.addAll(findPossTop(roundNum - 1, matchNumber * 2, inWinnersBracket));
 				
 				int tempCounter = 0;
@@ -281,6 +320,12 @@ public class DoubleBracket extends Bracket {
 					
 					// If it is any other round in the loser's bracket
 				} else if (roundNum > 1) {
+					
+					
+					
+					
+					
+					
 					
 					String top = loserRound.get(roundNum-1).get((newMatchNumber * 2) - 2);
 					String bottom = loserRound.get(roundNum-1).get((newMatchNumber * 2) - 1);
@@ -784,13 +829,28 @@ public class DoubleBracket extends Bracket {
 	@Override
 	int getMatchBracket(int roundNum, int matchNumber) {
 
-		// calculate match number including BYES
-		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
-
-		if (matchNumber * 2 <= round.get(roundNum - 1).size()) {
-			return 0; // if winners bracket then 0
-		} else if (matchNumber * 2 <= (round.get(roundNum - 1).size() + loserRound.get(roundNum - 1).size())) {
-			return 1; // if losers bracket then 1
+//		// calculate match number including BYES
+//		matchNumber = matchNumber + numMatchesSkipped(roundNum, inWinnersBracket);
+//
+//		if (matchNumber * 2 <= round.get(roundNum - 1).size()) {
+//			return 0; // if winners bracket then 0
+//		} else if (matchNumber * 2 <= (round.get(roundNum - 1).size() + loserRound.get(roundNum - 1).size())) {
+//			return 1; // if losers bracket then 1
+//		}
+		
+		int roundSize = round.get(roundNum - 1).size();
+		
+		boolean inWinnersBracket;
+		if (matchNumber * 2 <= roundSize) {
+			inWinnersBracket = true;
+		} else {
+			inWinnersBracket = false;
+		}
+		
+		if (inWinnersBracket) {
+			return 0;
+		} else if (!inWinnersBracket) {
+			return 1;
 		}
 
 		return -1;

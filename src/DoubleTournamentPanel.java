@@ -74,7 +74,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
         int winningHeight; //height of winner bracket
         int losingHeight; //height of loser bracket
 
-        colors = new RainbowColourPalette(tournament.getNumberOfTeams()*2-1); //creates new color palette based on predicted number of rounds
+        colors = new PinkBlueColourPalette(tournament.getNumberOfTeams()*2-1); //creates new color palette based on predicted number of rounds
         colorIndex = 0; //initializes the colour
 
         losingHeight = (int) Math.round(losePercentPage *maxY); //calculates the height allotted to the winner bracket using the required percentage
@@ -135,7 +135,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
             workingX += boxLength + HORIZONTAL_SPACE; //adjusts the workingX int
         }
-        drawLines(g, boxes); //draws the lines between matches which feed into each other
+        //drawLines(g, boxes); //draws the lines between matches which feed into each other
 
         int x1 = workingX - HORIZONTAL_SPACE + 10;
         int x2 = workingX - HORIZONTAL_SPACE + boxLength - 10;
@@ -325,7 +325,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 String[][] nextTeams; //arbitrary string array for the teams in a match from the next round
 
                 for (int set = 0; set < 2; set++) { //iterates twice through, since there are two arrays to be checked in the current matchbox
-                    for (int matchNum = 1; matchNum <= boxes.get(i + 1).length; matchNum++) {
+                    for (int matchNum = 1; matchNum <= boxes.get(i + 1 - 1).length; matchNum++) {
                         nextTeams = tournament.getTeamsInMatch(i + 1, matchNum); //stores the teams which play in that match
                         for (int teamNum = 0; teamNum < 2; teamNum++) {  //iterates twice through, since there are two arrays to be checked in the next matchbox
                             if (( //checking if the teams playing is already determined

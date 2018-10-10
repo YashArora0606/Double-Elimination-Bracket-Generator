@@ -19,7 +19,9 @@ class BracketTest {
 	}
 
 	public static void main(String[] args) {
-		ManagementSystem managementSystem = new ManagementSystem();		
+		
+		ManagementSystem managementSystem = new ManagementSystem();	
+
 		
 	
 //		ArrayList<Team> teams = new ArrayList<Team>();
@@ -35,6 +37,8 @@ class BracketTest {
 //		DoubleGenerator generator = new DoubleGenerator(teams, seed);
 //		DoubleBracket bracket = (DoubleBracket) generator.getBracket();
 //		
+//		bracket.setMatchWinner("D", 1, 1);
+//		
 //		
 //		System.out.println("winnerRound1 " + bracket.round.get(0));
 //		System.out.println("winnerRound2 " + bracket.round.get(1));
@@ -47,6 +51,13 @@ class BracketTest {
 //		System.out.println("loserRound3 " + bracket.loserRound.get(2));
 //		System.out.println("loserRound4 " + bracket.loserRound.get(3));
 //		System.out.println("loserRound5 " + bracket.loserRound.get(4));
+////		
+//		
+//		
+//		printTeams(bracket.getTeamsInMatch(2,2));
+
+//		System.out.println(bracket.getMatchBracket(1, 1));
+
 
 		
 		//System.out.println("THING " + bracket.getNumberOfMatchesInRound(1));
