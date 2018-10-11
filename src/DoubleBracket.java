@@ -26,6 +26,7 @@ public class DoubleBracket extends Bracket {
 	boolean inWinnersBracket;
 	static int numByesSeed = 0;
 	String[] finalMatch = new String[2];
+	int timesLoserBeatWinner = 0;
 	
 	
 	// ArrayList<Team>[] round;
@@ -179,8 +180,8 @@ public class DoubleBracket extends Bracket {
 	@Override
 	String[][] getTeamsInMatch(int roundNum, int matchNumber) {
 
-		//System.out.println("RoundNumber: " + roundNum);
-		//System.out.println("MatchNumber: " + matchNumber);
+		System.out.println("RoundNumber: " + roundNum);
+		System.out.println("MatchNumber: " + matchNumber);
 
 		int roundSize = round.get(roundNum - 1).size();
 
@@ -232,12 +233,19 @@ public class DoubleBracket extends Bracket {
 					//System.out.println("CASE 1");
 
 					String top = round.get(roundNum-1).get((matchNumber * 2) - 2);
-					String bottom1 = loserRound.get(roundNum-1).get(0);
-					String bottom2 = loserRound.get(roundNum-1).get(1);
+					
+					String[] bottom = new String[loserRound.get(roundNum-1).size()];
+//					
+//					String bottom1 = loserRound.get(roundNum-1).get(0);
+//					String bottom2 = loserRound.get(roundNum-1).get(1);
+					
+					for (int i = 0; i < bottom.length; i++) {
+						bottom[i] = loserRound.get(roundNum-1).get(i);
+					}
 					
 
 					teamsInMatch[0] = new String[] { top };
-					teamsInMatch[1] = new String[] { bottom1, bottom2 };
+					teamsInMatch[1] = bottom;
 					
 					return teamsInMatch;			
 					
@@ -778,8 +786,21 @@ public class DoubleBracket extends Bracket {
 	@Override
 	void setMatchWinner(String teamName, int roundNum, int matchNumber) {
 		
+		
+		// If it is the finals
 		if (roundNum-1 == initalRounds && matchNumber == 1) {
-			tournamentWinner = teamName;
+			
+			String tempWinner = teamName;
+			timesLoserBeatWinner++;
+			
+			// if the winner was from the winner bracket
+			if (tempWinner.equals(round.get(roundNum-1).get(0))) {
+				tournamentWinner = teamName;
+			} else if (timesLoserBeatWinner == 2) {
+				tournamentWinner = teamName;
+			}
+			
+			
 		} else {
 
 		int roundSize = round.get(roundNum - 1).size();

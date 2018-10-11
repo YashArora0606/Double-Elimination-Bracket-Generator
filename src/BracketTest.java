@@ -20,55 +20,66 @@ class BracketTest {
 
 	public static void main(String[] args) {
 		
-		//ManagementSystem managementSystem = new ManagementSystem();	
+		ManagementSystem managementSystem = new ManagementSystem();	
+
+//		
+//	
+//		ArrayList<Team> teams = new ArrayList<Team>();
+//		int numTeamsMade = 4;
+//
+//		for (int i = 0; i < numTeamsMade; i++) {
+//			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
+//		}
+//		
+//
+//		
+//		boolean seed = false; 
+//		DoubleGenerator generator = new DoubleGenerator(teams, seed);
+//		DoubleBracket bracket = (DoubleBracket) generator.getBracket();
+		
 
 		
-	
-		ArrayList<Team> teams = new ArrayList<Team>();
-		int numTeamsMade = 6;
-
-		for (int i = 0; i < numTeamsMade; i++) {
-			teams.add(new Team(Character.toString(((char) (65 + i))), (i + 1)));
-		}
 		
 
 		
-		boolean seed = false; 
-		DoubleGenerator generator = new DoubleGenerator(teams, seed);
-		DoubleBracket bracket = (DoubleBracket) generator.getBracket();
-		
-		bracket.setMatchWinner("D", 1, 1);
-		bracket.setMatchWinner("F", 1, 2);
-		bracket.setMatchWinner("A", 2, 1);
-		bracket.setMatchWinner("F", 2, 2);
-		
-		bracket.setMatchWinner("C", 1, 3);
-		bracket.setMatchWinner("C", 2, 3);
-		bracket.setMatchWinner("B", 3, 2);
-
-		
-		bracket.setMatchWinner("F", 3, 1);
-		
-		printTeams(bracket.getTeamsInMatch(4, 1));
-		bracket.setMatchWinner("B", 4, 1);
-		bracket.setMatchWinner("B", 4, 2);
+		// TEST CASE FOR 6 TEAMS
+//		bracket.setMatchWinner("D", 1, 1);
+//		bracket.setMatchWinner("F", 1, 2);
+//		bracket.setMatchWinner("A", 2, 1);
+//		bracket.setMatchWinner("F", 2, 2);
+//		
+//		bracket.setMatchWinner("C", 1, 3);
+//		bracket.setMatchWinner("C", 2, 3);
+//		bracket.setMatchWinner("B", 3, 2);
+//
+//		
+//		bracket.setMatchWinner("F", 3, 1);
+//		
+//		bracket.setMatchWinner("B", 4, 2);
+//		bracket.setMatchWinner("B", 4, 1);
+//		bracket.setMatchWinner("B", 4, 1);
+//		printTeams(bracket.getTeamsInMatch(4, 1));
 
 
-		Display disp = new Display(bracket);
-		
-		System.out.println("winnerRound1 " + bracket.round.get(0));
-		System.out.println("winnerRound2 " + bracket.round.get(1));
-		System.out.println("winnerRound3 " + bracket.round.get(2));
-		System.out.println("winnerRound4 " + bracket.round.get(3));
-		System.out.println("winnerRound5 " + bracket.round.get(4));
-
-		System.out.println("loserRound " + bracket.loserRound.get(0));
-		System.out.println("loserRound2 " + bracket.loserRound.get(1));
-		System.out.println("loserRound3 " + bracket.loserRound.get(2));
-		System.out.println("loserRound4 " + bracket.loserRound.get(3));
-		System.out.println("loserRound5 " + bracket.loserRound.get(4));
-
-		System.out.println("TOURNAMENT WINNER:" + bracket.getTournamentWinner());
+//
+//		Display disp = new Display(bracket);
+//		
+//		System.out.println("winnerRound1 " + bracket.round.get(0));
+//		System.out.println("winnerRound2 " + bracket.round.get(1));
+//		System.out.println("winnerRound3 " + bracket.round.get(2));
+//		System.out.println("winnerRound4 " + bracket.round.get(3));
+//		System.out.println("winnerRound5 " + bracket.round.get(4));
+//
+//		System.out.println("loserRound " + bracket.loserRound.get(0));
+//		System.out.println("loserRound2 " + bracket.loserRound.get(1));
+//		System.out.println("loserRound3 " + bracket.loserRound.get(2));
+//		System.out.println("loserRound4 " + bracket.loserRound.get(3));
+//		System.out.println("loserRound5 " + bracket.loserRound.get(4));
+//		
+//		printTeams(bracket.getTeamsInMatch(3, 1));
+//
+//
+//		System.out.println("TOURNAMENT WINNER:" + bracket.getTournamentWinner());
 
 		//printTeams(bracket.getTeamsInMatch(4, 1));
 		
