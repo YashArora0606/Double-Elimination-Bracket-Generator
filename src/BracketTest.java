@@ -1,26 +1,36 @@
-import java.util.ArrayList;
 
 class BracketTest {
 
-	static double log(int x, int base) {
-		return (double) (Math.log(x) / Math.log(base));
-	}
-	
-	static void printTeams(String[][] t) {
-		for (int i = 0; i < t[0].length; i++) {
-			System.out.println(t[0][i]);
-		}
-		System.out.println("----");
-		for (int i = 0; i < t[1].length; i++) {
-			System.out.println(t[1][i]);
-		}
-		System.out.println();
+//	static double log(int x, int base) {
+//		return (double) (Math.log(x) / Math.log(base));
+//	}
+//	
+//	static void printTeams(String[][] t) {
+//		for (int i = 0; i < t[0].length; i++) {
+//			System.out.println(t[0][i]);
+//		}
+//		System.out.println("----");
+//		for (int i = 0; i < t[1].length; i++) {
+//			System.out.println(t[1][i]);
+//		}
+//		System.out.println();
+//
+//	}
 
-	}
-
+	/*
+	 * Main Method
+	 */
 	public static void main(String[] args) {
 		
+		
+		// Create the UI
 		ManagementSystem managementSystem = new ManagementSystem();	
+
+        
+        //JOptionPane.showMessageDialog(null, "A Team Won!","Winner!", JOptionPane.OK_OPTION);
+
+        
+        //mainWindow.setSize(400, 600);
 
 //		
 //	
@@ -136,4 +146,5 @@ class BracketTest {
 
 
 	}
+
 }

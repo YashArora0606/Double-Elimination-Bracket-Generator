@@ -17,9 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 import java.awt.*;
-import java.awt.Graphics;
-import java.awt.Color;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -54,6 +51,7 @@ public class ManagementSystem {
     private JPanel centerPanel;
     private JPanel leftMainPanel;
     private JPanel rightMainPanel;
+    
 
     //JTextFields
     private JTextField nameField;
@@ -94,6 +92,8 @@ private boolean bracketCreated=false;
     public Display bracketDisplay;
     public SingleGenerator singleSeededGen;
     public SingleGenerator singleUnseededGen;
+    
+
 
     /**
      * ManagementSystem
@@ -102,19 +102,24 @@ private boolean bracketCreated=false;
      * @return void
      */
     ManagementSystem() {
-        JFrame mainWindow = new JFrame("Tournament Maker Pro");
+        JFrame mainWindow = new JFrame("ManGo Tournament Generator");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainWindow.setResizable(true);
+        mainWindow.setUndecorated(true);
 
         canvas = new GraphicsPanel();
         canvas.setLayout(new BorderLayout());
 
         //Title Label
-        titleLabel = new JLabel("Tournament Maker Pro", SwingConstants.CENTER);
+        titleLabel = new JLabel("ManGo Tournament Generator", SwingConstants.CENTER);
         titleLabel.setPreferredSize(new Dimension(1920, 100));
         titleLabel.setOpaque(false);
-        titleLabel.setFont(new Font("Century Gothic", Font.BOLD, 32));
+        //titleLabel.setFont(new Font("Century Gothic", Font.BOLD, 32));
+        titleLabel.setFont(getFont("assets/Comfortaa-Light.ttf", 32));
+
+        
+
         titleLabel.setForeground(Color.WHITE);
         canvas.add(titleLabel, BorderLayout.NORTH);
 
@@ -155,7 +160,10 @@ private boolean bracketCreated=false;
         //Main Prompt
         promptLabel = new JLabel("<html>" + "Enter teams, one per line." +
                 "<br>" + "Ordered by seed, best to worst." + "</html>");
-        promptLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        //promptLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        
+        promptLabel.setFont(getFont("assets/Comfortaa-Light.ttf", 16));
+
         promptLabel.setForeground(Color.WHITE);
         l.anchor = GridBagConstraints.FIRST_LINE_START;
         l.fill = GridBagConstraints.HORIZONTAL;
@@ -208,7 +216,10 @@ private boolean bracketCreated=false;
         //Error Message
         errorMessage = new JLabel("");
         errorMessage.setOpaque(false);
-        errorMessage.setFont(new Font("Century Gothic", Font.BOLD, 24));
+        
+        //errorMessage.setFont(new Font("Century Gothic", Font.BOLD, 24));
+        errorMessage.setFont(getFont("assets/Comfortaa-Light.ttf", 24));
+
         errorMessage.setForeground(Color.WHITE);
         southPanel.add(errorMessage);
 
@@ -218,7 +229,9 @@ private boolean bracketCreated=false;
         generateUnseededSinglesButton.setOpaque(false);
         generateUnseededSinglesButton.setContentAreaFilled(false);
         generateUnseededSinglesButton.setBorderPainted(false);
-        generateUnseededSinglesButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        //generateUnseededSinglesButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        generateUnseededSinglesButton.setFont(getFont("assets/Comfortaa-Light.ttf", 14));
+
         generateUnseededSinglesButton.setForeground(Color.WHITE);
         generateUnseededSinglesButton.setVerticalTextPosition(SwingConstants.CENTER);
         generateUnseededSinglesButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -261,7 +274,8 @@ private boolean bracketCreated=false;
 
         //Seeded Single Generator Button
         generateSeededSinglesButton = new JButton("<html><center>" + "Generate" + "<br>" + "Seeded Singles Bracket" + "</center></html>");
-        generateSeededSinglesButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        //generateSeededSinglesButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        generateUnseededSinglesButton.setFont(getFont("assets/Comfortaa-Light.ttf", 14));
         generateSeededSinglesButton.setForeground(Color.WHITE);
         generateSeededSinglesButton.setVerticalTextPosition(SwingConstants.CENTER);
         generateSeededSinglesButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -312,7 +326,9 @@ private boolean bracketCreated=false;
         generateDoublesButton.setOpaque(false);
         generateDoublesButton.setContentAreaFilled(false);
         generateDoublesButton.setBorderPainted(false);
-        generateDoublesButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        //generateDoublesButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        generateDoublesButton.setFont(getFont("assets/Comfortaa-Light.ttf", 14));
+
         generateDoublesButton.setForeground(Color.WHITE);
         generateDoublesButton.setVerticalTextPosition(SwingConstants.CENTER);
         generateDoublesButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -358,7 +374,9 @@ private boolean bracketCreated=false;
         nameLabel = new JLabel("<html><b>" + "Bracket Updater" + "</b><br>" +
                 "<br>" + " Enter Winning Team Name:" + "</html>");
         nameLabel.setOpaque(false);
-        nameLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        //nameLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        nameLabel.setFont(getFont("assets/Comfortaa-Light.ttf", 16));
+
         nameLabel.setForeground(Color.WHITE);
         r.anchor = GridBagConstraints.LAST_LINE_START;
         r.gridx = 0;
@@ -367,7 +385,9 @@ private boolean bracketCreated=false;
 
         roundLabel = new JLabel("Enter Team Round Number:");
         roundLabel.setOpaque(false);
-        roundLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        //roundLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        roundLabel.setFont(getFont("assets/Comfortaa-Light.ttf", 16));
+
         roundLabel.setForeground(Color.WHITE);
         r.anchor = GridBagConstraints.LAST_LINE_START;
         r.gridx = 0;
@@ -376,7 +396,9 @@ private boolean bracketCreated=false;
 
         matchLabel = new JLabel("Enter Team Match Number:");
         matchLabel.setOpaque(false);
-        matchLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        //matchLabel.setFont(new Font("Century Gothic", Font.BOLD, 16));
+        matchLabel.setFont(getFont("assets/Comfortaa-Light.ttf", 16));
+
         matchLabel.setForeground(Color.WHITE);
         r.anchor = GridBagConstraints.LAST_LINE_START;
         r.gridx = 0;
@@ -444,7 +466,9 @@ private boolean bracketCreated=false;
         updateButton.setOpaque(false);
         updateButton.setContentAreaFilled(false);
         updateButton.setBorderPainted(false);
-        updateButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        //updateButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+        updateButton.setFont(getFont("assets/Comfortaa-Light.ttf", 14));
+
         updateButton.setForeground(Color.WHITE);
         updateButton.setVerticalTextPosition(SwingConstants.CENTER);
         updateButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -567,6 +591,27 @@ private boolean bracketCreated=false;
             g.drawImage(background, 0, 0, this);
             setDoubleBuffered(true);
         }
+    }
+    
+    
+    /**
+     * getFont
+     * Method that returns custom fonts
+     *
+     * @param String fileName
+     * @param float size
+     * @return font
+     */
+    private static Font getFont(String fileName, float size){
+        Font font;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File(fileName)).deriveFont(size);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.PLAIN,new File(fileName)));
+        } catch (IOException | FontFormatException e){
+            font = new Font(Font.SANS_SERIF, Font.PLAIN, 15);
+        }
+        return font;
     }
 }
 
